@@ -1,0 +1,117 @@
+services:
+  # info:
+  #  build:
+  #    context: ./frontend/info/
+  #  ports:
+  #    - "3000:3000"
+
+  users:
+    restart: always
+    build:
+      context: ./users
+    ports:
+      - "8001:8001"
+
+  reports:
+    build:
+      context: ./reports
+    ports:
+      - "8002:8002"
+
+  black_list:
+    build:
+      context: ./blackList
+    ports:
+      - "8003:8003"
+
+  organization_data:
+    build:
+      context: ./organizationData
+    ports:
+      - "8004:8004"
+
+  user_categories:
+    build:
+      context: ./userCategories
+    ports:
+      - "8005:8005"
+
+  report_categories:
+    build:
+      context: ./reportCategories
+    ports:
+      - "8006:8006"
+
+  tasks_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: isj01
+      POSTGRES_PASSWORD: is067
+      POSTGRES_DB: tasks
+    ports:
+      - 5432:5432
+  
+  tasks:
+    build:
+      context: ./tasks/api
+    ports:
+      - "8007:8007"
+    depends_on:
+      - tasks_db
+
+  chats_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: isj01
+      POSTGRES_PASSWORD: is067
+      POSTGRES_DB: chats
+    ports:
+      - 5433:5432
+
+  chats:
+    build:
+      context: ./chats/api
+    ports:
+      - "8008:8008"
+    depends_on:
+      - chats_db
+
+  services_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: isj01
+      POSTGRES_PASSWORD: is067
+      POSTGRES_DB: services
+    ports:
+      - 5434:5432
+
+  tables:
+    build:
+      context: ./tables/api
+    ports:
+      - "8009:8009"
+      
+  services:
+    build:
+      context: ./virtualServices
+    ports:
+      - "8010:8010"
+    depends_on:
+      - services_db
+
+  pages_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: isj01
+      POSTGRES_PASSWORD: is067
+      POSTGRES_DB: pages
+    ports:
+      - 5435:5432
+
+  pages:
+    build:
+      context: ./pages
+    ports:
+      - "8011:8011"
+    depends_on:
+      - pages_db

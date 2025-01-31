@@ -1,0 +1,31 @@
+.row {
+    width: 300px;
+    height: 32px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.row:hover {
+    background: rgb(240, 240, 240);
+}
+
+.row-image {
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.row-username {
+    margin-left: 10px;
+    width: 75px;
+    cursor: pointer;
+    padding-top: 2px;
+}
+
+.row-email {
+    margin-left: 10px;
+    width: 75px;
+    cursor: pointer;
+    padding-top: 2px;
+}

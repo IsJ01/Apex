@@ -1,0 +1,33 @@
+.search-bar {
+    height: 65px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.search-bar-title {
+    font-size: 25px;
+}
+
+.search-bar-input {
+    border: 1px solid black;
+    border-radius: 7px;
+    outline: none;
+}
+
+.search-bar-button {
+    background: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid black;
+    border-radius: 7px;
+    margin-top: 37px;
+    margin-left: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.search-bar-button:hover {
+    transition: 0.2s;
+    background: black;
+    color: rgb(255, 255, 255);
+}
+

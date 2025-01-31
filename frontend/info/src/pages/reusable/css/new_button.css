@@ -1,0 +1,19 @@
+.new-button {
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    font-size: 25px;
+    line-height: 20px;
+    text-align: center;
+
+    cursor: pointer;
+
+}
+
+.new-button:hover {
+    background: rgb(100, 100, 100);
+    color: rgb(255, 255, 255);
+    transition: 0.3s;
+}

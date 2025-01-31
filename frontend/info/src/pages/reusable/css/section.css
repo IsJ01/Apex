@@ -1,0 +1,24 @@
+.bar-section {
+    width: 100%;
+}
+
+.bar-section-content {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid black;
+}
+
+.section-title {
+    width: 100%;
+    background: rgb(100, 100, 100);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border: 1px solid black;
+}
+
+.section-title:hover {
+    background: rgb(200, 200, 200);
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    transition: 0.3s;
+}

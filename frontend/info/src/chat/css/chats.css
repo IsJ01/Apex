@@ -1,0 +1,7 @@
+.chats {
+    margin-left: 15px;
+    padding-left: 13px;
+    overflow: auto;
+    height: 700px;
+    width: 350px;
+}

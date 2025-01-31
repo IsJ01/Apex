@@ -1,0 +1,56 @@
+.pages-section {
+    width: 100%;
+}
+
+.pages-section-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.new-page-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    font-size: 25px;
+    line-height: 20px;
+    text-align: center;
+
+    cursor: pointer;
+
+}
+
+.new-page-btn:hover {
+    background: rgb(100, 100, 100);
+    color: rgb(255, 255, 255);
+    transition: 0.3s;
+}
+
+.pages-list {
+    text-align: center;
+}
+
+.pages-list div a {
+    text-decoration: none;
+}
+
+.config-btn {
+    margin-left: 5px;
+    font-size: 14px;
+    border: 1px solid black;
+    background: none;
+    color: black;
+    border-radius: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.config-btn:hover {
+    background: rgb(100, 100, 100);
+    color: white;
+    transition: 0.3s;
+}

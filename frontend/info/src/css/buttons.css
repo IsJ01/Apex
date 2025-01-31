@@ -1,0 +1,130 @@
+.styleBtn {
+    line-height: normal;
+    background: rgba(255, 255, 255, 0);
+    color: rgb(230, 230, 230);
+    text-decoration: none;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 12px;
+    padding-left: 12px;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 5px;
+}
+
+.styleBtn:hover {
+    transition: 75ms;
+    border: 1px solid rgb(230, 230, 230);
+    background: rgb(230, 230, 230);
+    color: black;
+}
+
+.styleBtn-outline-dark {
+    color: rgb(60, 60, 60);
+    border: 1px solid rgb(60, 60, 60);
+}
+
+.styleBtn-outline-dark:hover {
+    color: rgb(230, 230, 230);
+    border: 1px solid rgb(60, 60, 60);
+    background: rgb(60, 60, 60);
+}
+
+.styleBtn-outline-warning {
+    color: #CDAA51;
+    border: 1px solid #CDAA51;
+}
+
+.styleBtn-outline-warning:hover {
+    color: rgb(60, 60, 60);
+    border: 1px solid #CDAA51;
+    background: #CDAA51;
+}
+
+.styleBtn-outline-neutral {
+    color: #A6B6A9;
+    border: 1px solid #A6B6A9;
+}
+
+.styleBtn-outline-neutral:hover {
+    color: rgb(60, 60, 60);
+    border: 1px solid #A6B6A9;
+    background: #A6B6A9;
+}
+
+.styleBtn-outline-detail-1 {
+    color: #8A9F9B;
+    border: 1px solid #8A9F9B;
+}
+
+.styleBtn-outline-detail-1:hover {
+    color: rgb(60, 60, 60);
+    border: 1px solid #8A9F9B;
+    background: #8A9F9B;
+}
+
+.styleBtn-outline-detail-2 {
+    color: #4b5c6f;
+    border: 1px solid #4b5c6f;
+}
+
+.styleBtn-outline-detail-2:hover {
+    color: rgb(230, 230, 230);
+    border: 1px solid #4b5c6f;
+    background: #4b5c6f;
+}
+
+.styleBtn-outline-ok {
+    color: #1e3b5b;
+    border: 1px solid #1e3b5b;
+}
+
+.styleBtn-outline-ok:hover {
+    color: rgb(230, 230, 230);
+    border: 1px solid #1e3b5b;
+    background: #1e3b5b;
+}
+
+.styleBtn-outline-new {
+    color: #1e3b5b;
+    border: 1px solid #314848;
+}
+
+.styleBtn-outline-new:hover {
+    color: rgb(230, 230, 230);
+    border: 1px solid #314848;
+    background: #314848;
+}
+
+.styleBtn-outline-danger {
+    color: rgb(175, 75, 75);
+    border: 1px solid rgb(175, 75, 75);
+}
+
+.styleBtn-outline-danger:hover {
+    color: rgb(230, 230, 230);
+    border: 1px solid rgb(200, 75, 75);
+    background: rgb(175, 75, 75);
+}
+
+.styleBtn-outline-use {
+    color: rgb(178, 73, 192);
+    border: 1px solid rgb(178, 73, 192);
+}
+
+.styleBtn-outline-use:hover {
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(178, 73, 192);
+    background: rgb(178, 73, 192);
+}
+
+.styleBtn-outline-normal {
+    background: rgba(255, 255, 255, 0);
+    transition: 120ms;
+    border: 1px solid rgb(100, 100, 100);
+    border-radius: 5px;
+}
+
+.styleBtn-outline-normal:hover {
+    background: rgb(150, 150, 150);
+    color: white;
+}

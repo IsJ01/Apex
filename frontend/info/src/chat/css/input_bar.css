@@ -1,0 +1,32 @@
+.input-bar {
+    border: 1px solid black;
+    width: 875px;
+    height: 48px;
+    margin-left: 25px;
+    border-radius: 7px;
+    margin-top: 1px;
+}
+
+.textField {
+    width: 825px;
+    margin-left: 10px;
+    margin-top: 8px;
+    border: 0px;
+}
+
+.textField:focus {
+    outline: 0px;
+}
+
+.send-button {
+    border: 1px solid black;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.send-button:hover {
+    transition: 0.2s;
+    background: black;
+    color: rgb(255, 255, 255);
+}

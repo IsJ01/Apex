@@ -1,0 +1,24 @@
+logging:
+  level:
+    root: FATAL
+
+server:
+  port: 8008
+
+spring:
+  application:
+    name: api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chats
+    username: isj01
+    password: is067
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: true
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false

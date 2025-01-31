@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: FATAL
+
+server:
+  port: 8009
+
+spring:
+  application:
+    name: api
+    

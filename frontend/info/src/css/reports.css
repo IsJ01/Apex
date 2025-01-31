@@ -1,0 +1,20 @@
+.reports-page {
+    display: flex;
+    height: 100%;
+    margin-top: 51px;
+}
+
+.reports-sideBar {
+    padding: 10px;
+    width: 20%;
+    border: 1px solid black;
+}
+
+.report-sideBar-row {
+    padding-left: 10px;
+}
+
+.reports {
+    width: 80%;
+    padding-left: 30%;
+}

@@ -1,0 +1,32 @@
+.rightBar {
+    width: 20%;
+    height: 100%;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+.right-bar-content {
+    padding: 10px 10px 10px 10px;
+}
+
+.add-btn {
+    border: none;
+    background: white;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    line-height: 20px;
+    font-size: 25px;
+    text-align: center;
+    padding: 0px 0px 3px 1px;
+}
+
+.field-label {
+    width: 150px;
+}
+
+.field-input {
+    height: 21px;
+    width: 75px;
+}
+

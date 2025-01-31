@@ -1,0 +1,28 @@
+logging:
+  level: 
+    root: FATAL
+  file:
+    name: tasks.log
+    path: /
+
+server:
+  port: 8007
+  context-path: /
+
+spring:
+  application:
+    name: api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasks
+    username: isj01
+    password: is067
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: true
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false

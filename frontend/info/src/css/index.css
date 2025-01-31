@@ -1,0 +1,68 @@
+html, body, body, .root {
+    height: 100%;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(130, 130, 130);
+}
+
+@media screen and (max-width: 1200px) {
+    .header {
+        display: block;
+    }
+    .title label {
+        width: 50px;
+    }
+}
+
+.title {
+    display: flex;
+}
+
+.title h2 {
+    padding-top: 4px;
+    margin-left: 20px;
+}
+
+.title label {
+    margin-left: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.menuBar {
+    display: flex;
+}
+
+.options {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 15px;
+}
+
+.login_or_logout {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+}
+
+.option {
+    margin-right: 5px;
+}
+
+.user_btn {
+    margin-right: 5px;
+}
+
+.user_label {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-right: 10px;
+}

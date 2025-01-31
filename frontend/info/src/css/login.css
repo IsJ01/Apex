@@ -1,0 +1,11 @@
+.login-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-content div p label {
+    width: 150px;
+    text-align: start;
+}
