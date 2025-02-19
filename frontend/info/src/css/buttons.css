@@ -8,7 +8,7 @@
     padding-right: 12px;
     padding-left: 12px;
     border: 1px solid rgb(230, 230, 230);
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .styleBtn:hover {
@@ -17,6 +17,36 @@
     background: rgb(230, 230, 230);
     color: black;
 }
+
+.styleBtn-outline-red {
+    color: rgb(216, 64, 64);
+    border: none;
+}
+
+.styleBtn-outline-red:hover {
+    color: rgb(238, 238, 238);
+    /* background: rgb(216, 64, 64); */
+    background: none;
+    border: none;
+    transition: 75ms;
+}
+
+
+.styleBtn-outline-red-2 {
+    color: rgb(216, 64, 64);
+    border: none;
+    border: 1px solid rgb(216, 64, 64);
+}
+
+.styleBtn-outline-red-2:hover {
+    color: rgb(0, 0, 0);
+    background: rgb(216, 64, 64);
+    border: 1px solid rgb(216, 64, 64);
+    transition: 75ms;
+}
+
+
+
 
 .styleBtn-outline-dark {
     color: rgb(60, 60, 60);

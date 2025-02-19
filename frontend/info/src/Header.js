@@ -54,35 +54,36 @@ export default function Header(props) {
     return (
         <header>
             <div className="title">
-                <h2>UCOR</h2>
-                <label>{title}</label>
+                <h2 style={{color: "rgb(216, 64, 64)"}}>UCOR</h2>
+                <label style={{color: "rgb(216, 64, 64)"}}>{title}</label>
             </div>
             <div className="menuBar">
                 <p className="options">
                     <select id="lang-select" defaultValue={props.lang} 
-                        onChange={onSelectLang} style={{marginRight: "5px", height: "26px"}}>
+                        onChange={onSelectLang} style={{marginRight: "5px", height: "26px", 
+                        background: 'rgb(29, 22, 22)', color: "rgb(216, 64, 64)", border: "none"}}>
                         <option>Русский (Rus)</option>
                         <option>English (UK)</option>
                     </select>
                     { (user.is_superuser || user.is_staff) && 
                         <>
-                            <a className="option styleBtn" href="/configure/" 
+                            <a className="option styleBtn styleBtn-outline-red" href="/configure/" 
                             title={text.confBtnTitle}>{text.confBtn}</a>
                         </>
                     }
-                    <a className="option styleBtn styleBtn-outline-neutral"
+                    <a className="option styleBtn styleBtn-outline-red"
                     href="/" title={text.homeBtnTitle}>{text.homeBtn}</a>
-                    <a className="option styleBtn styleBtn-outline-new" href="/pages/" 
+                    <a className="option styleBtn styleBtn-outline-red" href="/pages/" 
                     title={text.pagesTitle}>{text.pages}</a>
-                    <a className="option styleBtn styleBtn-outline-detail-1"
+                    <a className="option styleBtn styleBtn-outline-red"
                     href="/users/" title={text.usersBtnTitle}>{text.usersBtn}</a>
                     { user.is_authenticated && 
                         <>
                             {user.is_staff && 
-                            <a className="option styleBtn styleBtn-outline-detail-2" 
+                            <a className="option styleBtn styleBtn-outline-red" 
                                 href="/reports/" 
                                 title={text.reportsBtnTitle}>{text.reportsBtn}</a>}
-                            <a className="option styleBtn styleBtn-outline-dark"
+                            <a className="option styleBtn styleBtn-outline-red"
                                 href="/blackList/" 
                                 title={text.blackBtnTitle}>{text.blackBtn}</a>
                         </>
@@ -90,16 +91,16 @@ export default function Header(props) {
                 </p>
                 { user.is_authenticated ?
                     <p className="login_or_logout">
-                        <a href={`/users/${user.id}`}
+                        <a href={`/users/${user.id}`} style={{color: "rgb(238, 238, 238)"}}
                         className="user_label" title={text.profileTitle}>{ user.username }</a>
-                        <button className="user_btn styleBtn styleBtn-outline-warning"
+                        <button className="user_btn styleBtn styleBtn-outline-red"
                         onClick={logout} title={text.logoutBtnTitle}>{text.logoutBtn}</button>
                     </p>
                     :
                     <p className="login_or_logout">
-                        <a className="user_btn styleBtn styleBtn-outline-ok"
+                        <a className="user_btn styleBtn styleBtn-outline-red"
                         href="/login/" title={text.loginBtnTitle}>{text.loginBtn}</a>
-                        <a className="user_btn styleBtn styleBtn-outline-new"
+                        <a className="user_btn styleBtn styleBtn-outline-red"
                         href="/register/" title={text.regBtnTitle}>{text.regBtn}</a>
                     </p>
                 }

@@ -29,7 +29,8 @@
 }
 
 .pages-list {
-    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .pages-list div a {
@@ -37,7 +38,6 @@
 }
 
 .config-btn {
-    margin-left: 5px;
     font-size: 14px;
     border: 1px solid black;
     background: none;

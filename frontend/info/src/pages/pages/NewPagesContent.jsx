@@ -16,8 +16,6 @@ import apply from "./apply.js";
 
 function add(parent, id, value, setRightContent, setCurrentObj, props, req, childrens) {
 
-
-
     if (document.getElementById(`tag_${id}`) && id !== -1) {
         return
     }
@@ -33,6 +31,7 @@ function add(parent, id, value, setRightContent, setCurrentObj, props, req, chil
     if (Object.keys(req).length === 0) {
         new_row.setAttribute("req", "{}");
     } else {
+        console.log(req)
         new_row.setAttribute("req", JSON.stringify(req));
     }
 

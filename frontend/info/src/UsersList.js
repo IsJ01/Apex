@@ -162,13 +162,14 @@ export default function UsersList(props) {
                     <button className="styleBtn-outline-normal" type="button" onClick={close_dialog} title="Cancel changes">Cancel</button>
                 </div>
             </dialog>
-            <button style={{marginBottom: '5px'}} onClick={show_dialog} className="styleBtn styleBtn-outline-use">
+            <button style={{marginBottom: '5px'}} onClick={show_dialog} className="styleBtn styleBtn-outline-red-2">
                 {text.filterBtn}
             </button>
-            <a onClick={getFile("users.xlsx", "excel")} href="" style={{marginRight: "10px", marginLeft: "10px"}}>Exel</a>
-            <a onClick={getFile("users.pdf", "pdf")} href="">PDF</a>
+            <a onClick={getFile("users.xlsx", "excel")} href="" style={{marginRight: "10px", 
+                marginLeft: "10px", color: "rgb(216, 64, 64)"}}>Exel</a>
+            <a onClick={getFile("users.pdf", "pdf")} style={{color: "rgb(216, 64, 64)"}} href="">PDF</a>
             <Table rows={get_filter_users(users)} headers={headers}/>
-            <button onClick={apply} style={{marginTop: '5px'}} className="styleBtn styleBtn-outline-ok">
+            <button onClick={apply} style={{marginTop: '5px'}} className="styleBtn styleBtn-outline-red-2">
                 {text.applyBtn}
             </button>
         </div>

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.virtual.services.db.repository.FieldRepository;
-import com.virtual.services.dto.FieldCreateEditDto;
-import com.virtual.services.dto.FieldReadDto;
-import com.virtual.services.mapper.FieldCreateEditMapper;
-import com.virtual.services.mapper.FieldReadMapper;
+import com.virtual.services.dto.createEdit.FieldCreateEditDto;
+import com.virtual.services.dto.read.FieldReadDto;
+import com.virtual.services.mapper.create.FieldCreateEditMapper;
+import com.virtual.services.mapper.read.FieldReadMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,19 +29,8 @@ public class FieldService {
             .toList();
     }
 
-    public List<FieldReadDto> findAllByRowId(Long id) {
-        return fieldRepository.findAllByRowId(id).stream()
-            .map(fieldReadMapper::map)
-            .toList();
-    }
-
     public Optional<FieldReadDto> findById(Long id) {
         return fieldRepository.findById(id)
-            .map(fieldReadMapper::map);
-    }
-
-    public Optional<FieldReadDto> findByName(String name) {
-        return fieldRepository.findByName(name)
             .map(fieldReadMapper::map);
     }
 
@@ -51,30 +40,18 @@ public class FieldService {
             .map(fieldCreateEditMapper::map)
             .map(fieldRepository::save)
             .map(fieldReadMapper::map)
-            .orElseThrow();
+            .get();
     }
 
     @Transactional
     public Optional<FieldReadDto> update(Long id, FieldCreateEditDto dto) {
         return fieldRepository.findById(id)
-            .map(entity -> {
-                return fieldCreateEditMapper.map(dto, entity);
-            })
+            .map(entity -> fieldCreateEditMapper.map(dto, entity))
             .map(fieldRepository::saveAndFlush)
             .map(fieldReadMapper::map);
     }
 
     @Transactional
-    public Optional<FieldReadDto> updateByName(String name, FieldCreateEditDto dto) {
-        return fieldRepository.findByName(name)
-            .map(entity -> {
-                return fieldCreateEditMapper.map(dto, entity);
-            })
-            .map(fieldRepository::saveAndFlush)
-            .map(fieldReadMapper::map);
-    }
-
-    @Transactional 
     public boolean delete(Long id) {
         return fieldRepository.findById(id)
             .map(entity -> {
@@ -83,5 +60,6 @@ public class FieldService {
             })
             .orElse(false);
     }
+
 
 }

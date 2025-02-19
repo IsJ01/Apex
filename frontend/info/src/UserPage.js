@@ -184,41 +184,42 @@ export default function UserPage(props) {
                 <div className="settings-panel" style={{marginTop: '20px', marginLeft: '20px'}}>
                     <p>
                         <label>Name:</label>
-                        <input id='name-input' defaultValue={pageUser.username}/>
+                        <input className="settings-panel-input" id='name-input' defaultValue={pageUser.username}/>
                     </p>
                     <p>
                         <label>Number:</label>
-                        <input id='number-input' defaultValue={pageUser.number}/>
+                        <input className="settings-panel-input" id='number-input' defaultValue={pageUser.number}/>
                     </p>
                     <p>
                         <label>About:</label>
-                        <textarea id='about-input' style={{height: '30px', width: '189px', maxHeight: '200px'}}>
+                        <textarea className="settings-panel-input" id='about-input' 
+                            style={{height: '30px', width: '189px', maxHeight: '200px'}}>
                             {pageUser.about}
                         </textarea>
                     </p>
                     <p>
                         <label>Year of birth</label>
-                        <input id='year-input' defaultValue={pageUser.year_of_birth}/>
+                        <input className="settings-panel-input" id='year-input' defaultValue={pageUser.year_of_birth}/>
                     </p>
                     <p>
                         <label>New Password</label>
-                        <input id='password-input'/>
+                        <input className="settings-panel-input" id='password-input'/>
                     </p>
                     <p>
                         <label>Repeat New Password</label>
-                        <input id="repeat-password-input"/>
+                        <input className="settings-panel-input" id="repeat-password-input"/>
                     </p> 
                     <p>
                         <label>profile photo</label>
                         <input style={{visibility: 'hidden', position: 'absolute'}} id="image-input" 
                         type="file" accept="images/*"/> 
                         <label htmlFor="image-input" style={{width: '90px'}}>
-                            <span title="Choose image" className="styleBtn styleBtn-outline-use">Choose</span>
+                            <span title="Choose image" className="styleBtn styleBtn-outline-red-2">Choose</span>
                         </label>
                         <input title="Delete image" type="button" onClick={delete_image} 
                         className="styleBtn styleBtn-outline-danger" value="Delete"/>
                     </p>
-                    <button onClick={apply} className="styleBtn styleBtn-outline-ok">Apply</button>
+                    <button onClick={apply} className="styleBtn styleBtn-outline-red-2">Apply</button>
                 </div>
             );
         }
@@ -404,7 +405,7 @@ export default function UserPage(props) {
                             struct={get_drop_menu_struct()}/>
                     </p>
                 }
-                <label className="user-info-name">
+                <label className="user-image-label">
                     <img className="user-image" width={100} height={100} src={pageUser.image ? pageUser.image : user_img}/>
                 </label>
                 <label className="user-info-name">Name: {pageUser.username}</label>

@@ -9,9 +9,9 @@ spring:
   application:
     name: services
   datasource:
-    url: jdbc:postgresql://localhost:5434/postgres
-    username: postgres
-    password: pass
+    url: jdbc:postgresql://localhost:5434/services
+    username: isj01
+    password: is067
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
@@ -20,5 +20,6 @@ spring:
         format-sql: true
         hbm2ddl:
           auto: update
+        ddl-auto: update
         dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false

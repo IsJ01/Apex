@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.virtual.services.db.repository.RowRepository;
-import com.virtual.services.dto.RowCreateEditDto;
-import com.virtual.services.dto.RowReadDto;
-import com.virtual.services.mapper.RowCreateEditMapper;
-import com.virtual.services.mapper.RowReadMapper;
+import com.virtual.services.dto.createEdit.RowCreateEditDto;
+import com.virtual.services.dto.read.RowReadDto;
+import com.virtual.services.mapper.create.RowCreateEditMapper;
+import com.virtual.services.mapper.read.RowReadMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,19 +29,8 @@ public class RowService {
             .toList();
     }
 
-    public List<RowReadDto> findAllByServiceId(Long id) {
-        return rowRepository.findAllByServiceId(id).stream()
-            .map(rowReadMapper::map)
-            .toList();
-    }
-
     public Optional<RowReadDto> findById(Long id) {
         return rowRepository.findById(id)
-            .map(rowReadMapper::map);
-    }
-
-    public Optional<RowReadDto> findByName(String name) {
-        return rowRepository.findByName(name)
             .map(rowReadMapper::map);
     }
 
@@ -51,26 +40,14 @@ public class RowService {
             .map(rowCreateEditMapper::map)
             .map(rowRepository::save)
             .map(rowReadMapper::map)
-            .orElseThrow();
+            .get();
     }
 
     @Transactional
     public Optional<RowReadDto> update(Long id, RowCreateEditDto dto) {
         return rowRepository.findById(id)
-            .map(entity -> {
-                return rowCreateEditMapper.map(dto, entity);
-            })
-            .map(rowRepository::save)
-            .map(rowReadMapper::map);
-    }
-
-    @Transactional
-    public Optional<RowReadDto> updateByName(String name, RowCreateEditDto dto) {
-        return rowRepository.findByName(name)
-            .map(entity -> {
-                return rowCreateEditMapper.map(dto, entity);
-            })
-            .map(rowRepository::save)
+            .map(entity -> rowCreateEditMapper.map(dto, entity))
+            .map(rowRepository::saveAndFlush)
             .map(rowReadMapper::map);
     }
 

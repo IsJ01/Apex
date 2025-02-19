@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Register from "./Register.js";
-import Home from "./Home.js";
+import Home from "./Inbox.js";
 import Login from "./Login.js";
 import Header from "./Header.js";
 import Configure from './configure/Configure.js';

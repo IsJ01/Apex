@@ -1,5 +1,5 @@
 import axios from "axios";
-import { elements_api_url, pages_api_url, props_api_url, get_page_by_id, isPageExist } from "../../give_objects";
+import { elements_api_url, pages_api_url, props_api_url, isPageExist } from "../../give_objects";
 
 async function add_elements(pageId, parentId, curr) {
     let value = curr.children[0].children[1].value;

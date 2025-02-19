@@ -5,10 +5,17 @@
     margin-top: 4px;
     width: 31px;
     height: 31px;
+    background: rgb(238, 238, 238);
 }
 
 .settings-panel p label {
     width: 150px;
+    color: rgb(142, 22, 22);
+}
+
+.settings-panel-input {
+    border-radius: 3px;
+    border: 1px solid rgb(64, 22, 22);
 }
 
 .cancel_button {
@@ -44,7 +51,14 @@
     width: 20%;
 }
 
+.user-image-label {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
 .user-info-name {
+    color: rgb(142, 22, 22);
     text-align: center;
     margin-top: 20px;
     width: 100%;
@@ -57,15 +71,16 @@
 }
 
 .description-btn {
-    border: 1px solid black;
+    border: 1px solid rgb(142, 22, 22);
     border-radius: 11px;
     background: none;
     padding-left: 25px;
     padding-right: 25px;
+    color: rgb(142, 22, 22);
 }
 
 .description-btn:hover {
-    background: black;
+    background: rgb(142, 22, 22);
     color: white;
     transition: 120ms;
 }

@@ -146,9 +146,9 @@ export default function Reports() {
                 <div className="reports-sideBar">
                     <p className="report-sideBar-row">Set filters&nbsp;&nbsp;
                         <button onClick={() => document.getElementById('filter-dialog').showModal()} 
-                        className="styleBtn styleBtn-outline-use">Filter</button>&nbsp;&nbsp;
+                        className="styleBtn styleBtn-outline-red-2">Filter</button>&nbsp;&nbsp;
                         <button onClick={drop_filters} 
-                        className="styleBtn styleBtn-outline-warning">Drop Filters</button>
+                        className="styleBtn styleBtn-outline-red-2">Drop Filters</button>
                     </p>
                     <p className="report-sideBar-row">Awaiting response: {awaiting_reports.length}</p>
                     <p className="report-sideBar-row">Accepted: {accepted_reports.length}</p>

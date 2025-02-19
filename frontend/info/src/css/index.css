@@ -10,7 +10,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgb(130, 130, 130);
+    background: rgb(29, 22, 22);
 }
 
 @media screen and (max-width: 1200px) {

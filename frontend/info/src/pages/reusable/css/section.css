@@ -10,15 +10,15 @@
 
 .section-title {
     width: 100%;
-    background: rgb(100, 100, 100);
-    color: rgb(255, 255, 255);
+    background: rgb(0, 0, 0);
+    color: rgb(216, 64, 64);
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid rgb(216, 64, 64);
 }
 
 .section-title:hover {
-    background: rgb(200, 200, 200);
-    color: rgb(25, 25, 25);
+    background: rgb(216, 64, 64);
+    color: rgb(0, 0, 0);
     cursor: pointer;
     transition: 0.3s;
 }

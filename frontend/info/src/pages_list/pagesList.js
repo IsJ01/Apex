@@ -1,19 +1,40 @@
 import { Route } from "react-router-dom";
-import { get_pages_tree } from "../give_objects";
+import { get_pages_tree, get_service_by_name } from "../give_objects";
 import JsxParser from "react-jsx-parser";
 
 import {TAGS} from "./tags.js";
 
 
-const NPROPS = ["method", 'auto inject data', 'service'];
+const NPROPS = ["method", 'auto inject data', 'service', "table"];
 
 
-function element(el, level) {
+function element(el, level, val) {
     if (TAGS.includes(el.value)) {
 
         let props = el.properties
-        .filter(prop => !NPROPS.includes(prop) && prop.value !== "")
+        .filter(prop => !NPROPS.includes(prop.name) && prop.value !== "")
         .map(prop => `${"\t".repeat(level)}${prop.name}:${prop.value};`);
+
+        let ser_proprs = {};
+        el.properties
+        .filter(prop => NPROPS.includes(prop.name))
+        .map(prop => ser_proprs[prop.name] = prop.value);
+        
+        let values = [];
+        if (ser_proprs.service && ser_proprs.method === "GET" && ser_proprs.table) {
+            get_service_by_name(ser_proprs.service).tabs?.
+            filter(tab => ser_proprs.table === tab.name)[0]?.
+            rows.map(row => {
+                values.push([]);
+                row.fields.map(field => {
+                    if (values[values.length - 1].length < el.childrens?.length) {
+                        values[values.length - 1].push(field.value);
+                    }
+                })
+            });
+            console.log(values)
+        }
+
 
         if (props) {
             props = `style="${props}"`;
@@ -21,13 +42,29 @@ function element(el, level) {
             props = "";
         }
 
-        let tag = `${"\t".repeat(level)}<${el.value} ${props}>`
+        let tag = `${"\t".repeat(level)}<${el.value} ${props}>`+
+        '\n'
+        + 
+        `${"\t".repeat(level)}`
+        + 
+        `${val ? val : ""}`
         + 
         '\n'
         + 
-        el.childrens.map(
+        `${
+            !(ser_proprs.service && ser_proprs.method === "GET" && ser_proprs.table)
+            ?
+            el.childrens.map(
             child => element(child, level + 1)
-        ).join("\n")
+            ).join("\n")
+            :
+            values.map(row => {
+                return el.childrens.map(
+                    child => element(child, level + 1, row[el.childrens.indexOf(child)]))
+                    .join("\n");
+            })
+                
+        }`
         +
         '\n'
         + 

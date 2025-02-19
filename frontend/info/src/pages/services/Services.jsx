@@ -1,11 +1,18 @@
 import "../css/services.css"
 import NewServiceContent from "./NewServiceContent"
 
-import {get_services} from "../../give_objects.js";
-
+import {get_services, services_api_url} from "../../give_objects.js";
 
 function setServiceContent(func) {
+    document.getElementById("rightBar").style.display = "none";
+    document.getElementById("pages-central").style.width = "80%";
     func(<NewServiceContent/>);
+}
+
+function editService(func, id) {
+    document.getElementById("rightBar").style.display = "none";
+    document.getElementById("pages-central").style.width = "80%";
+    func(<NewServiceContent id={id}/>)
 }
 
 
@@ -19,7 +26,14 @@ export default function Services(props) {
             </div>
             <div className="services-list">
                 {get_services().map(service => {
-                    return <div>Name: {service.name} Rows: {service.rows.length}</div>;
+                    return <div style={{textAlign: "center"}}>Name:&nbsp;
+                        <a style={{textDecoration: "none"}} target="_blank" 
+                            href={`${services_api_url}/service/${service.name}/`}>
+                            {service.name}
+                        </a>
+                        <button onClick={() => {editService(props.setContent, service.id)}}
+                            title="Configure" className="config-btn">⚙</button>
+                    </div>;
                 })}
             </div>
         </div>

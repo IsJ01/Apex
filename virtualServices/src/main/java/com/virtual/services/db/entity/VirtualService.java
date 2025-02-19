@@ -33,7 +33,7 @@ public class VirtualService implements BaseEntity<Long> {
     private String name;
 
     @Builder.Default
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "serviceId", cascade = CascadeType.ALL)
-    private List<Row> rows = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "virtualService")
+    private List<Tab> tabs = new ArrayList<>();
 
 }

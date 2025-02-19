@@ -30,6 +30,7 @@ export default function Table(props) {
             element = <a href={col.href} id={col.id} style={{textAlign: "center",
                 overflow: "hidden",
                 height: '24px',
+                color: "rgb(142, 22, 22)",
                 textDecoration: 'none'}}>{col.text}</a>;
 
         }
@@ -39,17 +40,19 @@ export default function Table(props) {
         return element;
     }
 
+    const red_color = "rgb(216, 64, 64)";
+
     let rows = props.rows.map(row => 
         <tr>
-            {row[0].isId && <td style={{border: "1px solid black", textAlign: "center", 
-                        borderRadius: "3px"}}>
-                    <input style={{border: 'none', background: 'none'}} type="button"
+            {row[0].isId && <td style={{border: `1px solid ${red_color}`, textAlign: "center", 
+                        borderRadius: "3px", background: "none", color: red_color}}>
+                    <input style={{border: 'none', background: 'none', color: red_color}} type="button"
                      onClick={onClick(row[0].onclick)} value={row[0].text} onBlur={focusOut(row[0].onblur)}/>
                 </td>
             }
             {row.slice(1).map(col => 
-                    <td style={{border: "1px solid black", textAlign: "center", 
-                        borderRadius: "3px"}}>
+                    <td style={{border: `1px solid ${red_color}`, textAlign: "center", 
+                        borderRadius: "3px", background: "none", color: red_color}}>
                         {get_column(col)}
                     </td>
                 )
@@ -58,14 +61,16 @@ export default function Table(props) {
     );
     return (
         <>
-            <table style={{borderCollapse: "separate", border: "1px solid black", minWidth: '300px', borderRadius: "5px"}}>
+            <table style={{borderCollapse: "separate", border: `1px solid ${red_color}`, 
+                minWidth: '300px', borderRadius: "5px", background: "none"}}>
                 <thead>
                     <tr>{props.headers.map(col => <th
-                        style={{border: "1px solid black", 
+                        style={{border: `1px solid ${red_color}`, 
                         textAlign: "center", 
                         minWidth: "50px",
-                        background: "rgb(210, 210, 210)",
-                        borderRadius: "3px"
+                        background: "rgb(0, 0, 0)",
+                        borderRadius: "3px",
+                        color: red_color
                         }}>
                             {col}
                         </th>)}

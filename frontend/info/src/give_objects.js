@@ -10,9 +10,11 @@ const tasks_api_url = "http://127.0.0.1:8007/api/v1";
 const chats_api_url = "http://127.0.0.1:8008/api/v1/chats";
 const messages_api_url = "http://127.0.0.1:8008/api/v1/messages";
 const tables_api_url = "http://127.0.0.1:8009/api/v1/tables";
-const services_api_url = "http://127.0.0.1:8010/api/v1/services";
+const services_api_url = "http://127.0.0.1:8010/api/v1/virtualServices";
 const rows_api_url = "http://127.0.0.1:8010/api/v1/rows";
 const fields_api_url = "http://127.0.0.1:8010/api/v1/fields";
+const tabs_api_url = "http://127.0.0.1:8010/api/v1/tabs";
+const cols_api_url = "http://127.0.0.1:8010/api/v1/cols";
 const pages_api_url = "http://127.0.0.1:8011/api/v1/pages";
 const elements_api_url = "http://127.0.0.1:8011/api/v1/elements";
 const props_api_url = "http://127.0.0.1:8011/api/v1/properties";
@@ -43,6 +45,8 @@ let get_fields = get_objects(fields_api_url);
 let get_pages = get_objects(pages_api_url);
 let get_elements = get_objects(elements_api_url);
 let get_properties = get_objects(props_api_url);
+let get_cols = get_objects(cols_api_url);
+let get_tabs = get_objects(tabs_api_url);
 
 
 function get_user(id) {
@@ -112,14 +116,31 @@ function isPageExist(uri) {
     return page;
 }
 
+function get_service_by_id(id) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${services_api_url}/${id}/`, false);
+    xhr.send();
+    let page = JSON.parse(xhr.responseText);
+    return page;
+}
+
+
+function get_service_by_name(name) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${services_api_url}/service/${name}/`, false);
+    xhr.send();
+    let page = JSON.parse(xhr.responseText);
+    return page;
+}
+
 export {
     users_api_url, reports_api_url, black_list_api_url, user_categories_api_url, report_categories_api_url, data_api_url, 
     tasks_api_url, chats_api_url, messages_api_url, tables_api_url, services_api_url, rows_api_url, fields_api_url, 
-    pages_api_url, elements_api_url, props_api_url, 
+    pages_api_url, elements_api_url, props_api_url, cols_api_url, tabs_api_url,
     get_services, get_rows, get_fields,get_users, get_reports, get_black_list, get_user_categories, get_report_categories, 
     get_organization_data, get_user, get_user_from_email, get_report, get_black_user, get_user_category, get_report_category, 
     get_data_field, get_tasks, get_chats, get_messages, get_pages, get_elements, get_properties, get_page_tree_by_id, get_page_by_id,
-    isPageExist, get_pages_tree
+    isPageExist, get_pages_tree, get_cols, get_tabs, get_service_by_id, get_service_by_name
 }
 
 

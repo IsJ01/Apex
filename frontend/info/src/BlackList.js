@@ -117,16 +117,16 @@ export default function BlackList() {
             </dialog>
             <button style={{marginBottom: '5px'}}
                         onClick={() => {document.getElementById('black-list-f-dialog').showModal()}} 
-                        className="styleBtn styleBtn-outline-use">Filter</button>
+                        className="styleBtn styleBtn-outline-red-2">Filter</button>
             <Table rows={rows} headers={["Id", "Email", "Cause"]}/>
             {user.is_staff && 
                 <>
                     <button style={{marginTop: '5px', marginRight: '5px'}} 
                         onClick={() => {document.getElementById('black-list-dialog').showModal()}}
-                        className="styleBtn styleBtn-outline-ok">Add</button>
+                        className="styleBtn styleBtn-outline-red-2">Add</button>
                     <button style={{marginTop: '5px'}} 
                         onClick={delete_from_black_list}
-                        className="styleBtn styleBtn-outline-danger">Delete</button>
+                        className="styleBtn styleBtn-outline-red-2">Delete</button>
                 </>
             }
         </div>
