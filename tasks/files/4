@@ -1,0 +1,22 @@
+import os
+
+directory = input()
+
+
+def find(parent, current) -> int:
+    if current in [".git", ".idea", ".vscode", ".mvn", "target",
+                   "__pycache__", "migrations", "db.sqlite3"
+                   ".gitignore", "mvnw", ".gitattributes",
+                   "mvnw.cmd", "HELP.md", "pom.xml", "public",
+                   "package.json", "package-lock.json", "README.md", 
+                   "node_modules", "public"]:
+        return 0
+    obj = str(os.path.join(parent, current))
+    if os.path.isfile(obj):
+        return len([i for i in open(obj, encoding="latin1").read().split("\n")])
+    else:
+        return sum(find(obj, new_obj) for new_obj in os.listdir(obj))
+
+
+print(find(directory, ""))
+input()
