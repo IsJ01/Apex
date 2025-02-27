@@ -5,6 +5,7 @@ function getHeaderText(lang) {
             text = {
                 confBtn: "Configure",
                 homeBtn: "Inbox",
+                tasks: "Tasks",
                 usersBtn: "Users",
                 reportsBtn: "Reports",
                 blackBtn: "Black list",
@@ -14,8 +15,9 @@ function getHeaderText(lang) {
                 pages: "Pages",
 
                 confBtnTitle: "Configure",
-                homeBtnTitle: "Home",
+                homeBtnTitle: "Inbox",
                 usersBtnTitle: "Users",
+                tasksTitle: "Tasks page",
                 reportsBtnTitle: "Reports",
                 blackBtnTitle: "Black list of users",
                 logoutBtnTitle: "Logout",
@@ -29,6 +31,7 @@ function getHeaderText(lang) {
             text = {
                 confBtn: "Настройки",
                 homeBtn: "Входящие",
+                tasks: "Задачи",
                 usersBtn: "Пользователи",
                 reportsBtn: "Отчеты",
                 blackBtn: "Черный список",
@@ -39,6 +42,7 @@ function getHeaderText(lang) {
 
                 confBtnTitle: "Настройки сайта",
                 homeBtnTitle: "Домашняя страница",
+                tasksTitle: "Страница задач",
                 usersBtnTitle: "список пользователей",
                 reportsBtnTitle: "Список отчетов",
                 blackBtnTitle: "Черный список пользователей",

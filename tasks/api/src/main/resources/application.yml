@@ -24,5 +24,7 @@ spring:
         format-sql: true
         hbm2ddl:
           auto: update
+        ddl-auto:
+          update
         dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false

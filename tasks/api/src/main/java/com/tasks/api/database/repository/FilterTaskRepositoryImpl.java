@@ -21,7 +21,9 @@ public class FilterTaskRepositoryImpl implements FilterTaskRepository {
     public List<Task> findAllByFilter(TaskFilter filter) {
         var predicate = QPredicates.builder()
                 .add(filter.getOf(), task.of::eq)
-                .add(filter.getNear(), task.near::eq)
+                .add(filter.getResponsible(), task.responsible::eq)
+                .add(filter.getRepetitive(), task.repetitive::eq)
+                .add(filter.getChecked(), task.checked::eq)
                 .add(filter.getStatus(), task.status::in)
                 .build();
         

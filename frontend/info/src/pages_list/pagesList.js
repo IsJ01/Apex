@@ -32,7 +32,6 @@ function element(el, level, val) {
                     }
                 })
             });
-            console.log(values)
         }
 
 

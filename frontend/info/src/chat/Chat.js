@@ -23,7 +23,6 @@ export default function Chat(props) {
         }
     });
     let near = (props.user.id = props.chat.user1.id) ? props.chat.user2.id : props.chat.user1.id;
-    console.log(near, props.user, props.chat);
     return (
         <>
             <div className="chat">

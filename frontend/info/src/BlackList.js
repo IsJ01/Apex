@@ -16,6 +16,8 @@ export default function BlackList() {
         updateUser();
     }, []);
 
+    document.title = "Black list";
+
     function updateUser() {
         let sessionid = get_sessionid();
         axios.get(`${users_api_url}/current/`, 

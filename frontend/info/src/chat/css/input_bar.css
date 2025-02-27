@@ -1,6 +1,6 @@
 .input-bar {
     border: 1px solid black;
-    width: 875px;
+    width: 100%;
     height: 48px;
     margin-left: 25px;
     border-radius: 7px;
@@ -8,7 +8,7 @@
 }
 
 .textField {
-    width: 825px;
+    width: 90%;
     margin-left: 10px;
     margin-top: 8px;
     border: 0px;

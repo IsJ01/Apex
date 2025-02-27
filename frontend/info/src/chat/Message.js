@@ -1,8 +1,8 @@
 export default function Message(props) {
     let style = {};
+    let style2 = {};
     if (props.side == "end") {
         style = {
-            marginLeft: "715px",
             marginTop: "10px",
             minHeight: "30px",
             maxWidth: "150px",
@@ -10,6 +10,10 @@ export default function Message(props) {
             borderRadius: "5px 5px 0px 5px",
             wordBreak: "break-all"
         };
+        style2 = {
+            display: "flex",
+            justifyContent: "end"
+        }
     } else {
         style = {
             marginLeft: "15px",
@@ -22,6 +26,8 @@ export default function Message(props) {
         };
     }
     return (
-        <div style={style}>{props.message.text}</div>
+        <div style={style2}>
+            <label style={style}>{props.message.text}</label>
+        </div>
     );
 }

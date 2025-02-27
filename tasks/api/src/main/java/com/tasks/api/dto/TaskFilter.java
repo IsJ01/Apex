@@ -7,7 +7,9 @@ import lombok.Value;
 @Value
 public class TaskFilter {
     Integer of;
-    Integer near;
+    Integer responsible;
     String description;
+    Boolean repetitive;
+    Boolean checked;
     Status status;
 }

@@ -1,5 +1,5 @@
 .row {
-    width: 300px;
+    width: 50%;
     height: 32px;
     margin-top: 10px;
     border: 1px solid black;
@@ -17,15 +17,66 @@
 }
 
 .row-username {
-    margin-left: 10px;
-    width: 75px;
+    width: 50%;
+    margin-left: 25px;
     cursor: pointer;
     padding-top: 2px;
+    overflow: hidden;
 }
 
-.row-email {
-    margin-left: 10px;
-    width: 75px;
-    cursor: pointer;
-    padding-top: 2px;
+@media screen and (max-width: 1024px) {
+    .row {
+        width: 70%;
+        height: 32px;
+        margin-top: 10px;
+        border: 1px solid black;
+        border-radius: 9px;
+        cursor: pointer;
+    }
+
+    .row:hover {
+        background: rgb(240, 240, 240);
+    }
+
+    .row-image {
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .row-username {
+        width: 50%;
+        margin-left: 25px;
+        cursor: pointer;
+        padding-top: 2px;
+        overflow: hidden;
+    }
 }
+
+@media screen and (max-width: 450px) {
+    .row {
+        width: 70%;
+        height: 32px;
+        margin-top: 10px;
+        border: 1px solid black;
+        border-radius: 9px;
+        cursor: pointer;
+    }
+
+    .row:hover {
+        background: rgb(240, 240, 240);
+    }
+
+    .row-image {
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .row-username {
+        width: 50%;
+        margin-left: 25px;
+        cursor: pointer;
+        padding-top: 2px;
+        overflow: hidden;
+    }
+}
+

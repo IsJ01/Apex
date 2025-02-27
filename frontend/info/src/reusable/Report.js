@@ -1,9 +1,9 @@
 export default function Report(props) {
     let color;
-    if (props.status == 'Under consideration') {
+    if (props.status === 'Under consideration') {
         color = 'rgb(200, 200, 200, 0.5)';
     }
-    else if (props.status == 'accepted') {
+    else if (props.status === 'accepted') {
         color = 'rgba(0, 255, 0, 0.5)';
     } 
     else {

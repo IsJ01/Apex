@@ -22,6 +22,8 @@ export default function Register() {
         updateUser();
     }, []);
 
+    document.title = "Register";
+
     function updateUser() {
         let sessionid = get_sessionid();
         axios.get(`${api_url}/current/`, 

@@ -38,12 +38,20 @@ public class TaskService {
     public Page<TaskReadDto> findAll(TaskFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.getOf(), task.of::eq)
-                .add(filter.getNear(), task.near::eq)
+                .add(filter.getResponsible(), task.responsible::eq)
+                .add(filter.getRepetitive(), task.repetitive::eq)
+                .add(filter.getChecked(), task.checked::eq)
                 .add(filter.getDescription(), task.description::containsIgnoreCase)
                 .add(filter.getStatus(), task.status::in)
                 .build();
         return taskRepository.findAll(predicate, pageable)
                 .map(taskReadMapper::map);
+    }
+
+    public List<TaskReadDto> findAllByRepetitive(Boolean repetitive) {
+        return taskRepository.findByRepetitive(repetitive).stream()
+            .map(taskReadMapper::map)
+            .toList();
     }
 
     public Optional<TaskReadDto> findById(Integer id) {
@@ -63,6 +71,14 @@ public class TaskService {
     public Optional<TaskReadDto> update(Integer id, TaskCreateEditDto dto) {
         return taskRepository.findById(id)
             .map(entity -> taskCreateEditMapper.map(dto, entity))
+            .map(taskRepository::saveAndFlush)
+            .map(taskReadMapper::map);
+    }
+
+    @Transactional
+    public Optional<TaskReadDto> patch(Integer id, TaskCreateEditDto dto) {
+        return taskRepository.findById(id)
+            .map(entity -> taskCreateEditMapper.patchMap(dto, entity))
             .map(taskRepository::saveAndFlush)
             .map(taskReadMapper::map);
     }

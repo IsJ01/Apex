@@ -21,6 +21,8 @@ export default function UsersList(props) {
         _get_users();
     }, []);
 
+    document.title = "Users";
+
     function updateUser() {
         let sessionid = get_sessionid();
         axios.get(`${users_api_url}/current/`, 

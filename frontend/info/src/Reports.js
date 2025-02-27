@@ -16,6 +16,8 @@ export default function Reports() {
         updateUser();
     }, []);
 
+    document.title = "Reports";
+
     function updateUser() {
         let sessionid = get_sessionid();
         axios.get(`${users_api_url}/current/`, 

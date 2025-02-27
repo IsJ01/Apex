@@ -50,6 +50,7 @@ export default function UserPage(props) {
     function get_page_user() {
         axios.get(`${users_api_url}/${id}/`).then(res => {
             setPageUser(res.data);
+        document.title = res.data.username;
         });
     }
 
@@ -140,33 +141,6 @@ export default function UserPage(props) {
         window.location.reload(true);
     }
 
-    function add_task() {
-        let to = document.getElementById('task-dialog-to').value;
-        let description = document.getElementById('task-dialog-desc').value;
-        let to_user = get_user_from_email(to);
-        axios.post(`${tasks_api_url}/`, {near: to_user.id, of: user.id, description: description, status: "IN_PROGRESS"},
-            {headers: {sessionid: get_sessionid()}}
-        )
-        window.location.reload(true);
-    }
-
-    function select(props) {
-        return function(e) {
-            let value = e.target.value;
-            if (['IN_PROGRESS', 'COMPLETE', 'UNCOMPLETE'].includes(value)) {
-                axios.put(`${tasks_api_url}/${props.id}`, {
-                    "near": props.near, 
-                    "of": props.of,
-                    "description": props.description,
-                    "status": value.trim()},
-                    {headers: {sessionid: get_sessionid()}}
-                )
-                .catch(e => console.log(e));
-                window.location.reload(true);
-            }
-        }
-    }
-
     // функция отображения центральной панели
     function get_central_panel(mode) {
 
@@ -216,7 +190,7 @@ export default function UserPage(props) {
                         <label htmlFor="image-input" style={{width: '90px'}}>
                             <span title="Choose image" className="styleBtn styleBtn-outline-red-2">Choose</span>
                         </label>
-                        <input title="Delete image" type="button" onClick={delete_image} 
+                        <input style={{width: "75px"}} title="Delete image" type="button" onClick={delete_image} 
                         className="styleBtn styleBtn-outline-danger" value="Delete"/>
                     </p>
                     <button onClick={apply} className="styleBtn styleBtn-outline-red-2">Apply</button>
@@ -266,53 +240,6 @@ export default function UserPage(props) {
                 </div>
             );
         }
-        else if (mode == 'tasks-to') {
-            let tasks = get_tasks().content.filter(t => t["near"] == user.id).map(t => <Task {...t}/>);
-            panel = (
-                <div>
-                    <div style={{margin: '10px'}}>
-                        <div style={{overflow: "auto", width: "300px"}}>
-                            {tasks}
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-        else if (mode == 'tasks-of') {
-            let users = get_users();
-            let tasks = get_tasks().content.filter(t => t["of"] == user.id).map(t => <Task {...t} select={select(t)}/>);
-            panel = (
-                <div>
-                    <div style={{margin: '10px'}}>
-                        <dialog style={{border: '1px solid black', borderRadius: '9px'}} id="task-dialog">
-                            <CancelButton func={close_dialog('task-dialog')}/>
-                            <fieldset>
-                                <p>
-                                    <label>To:</label>
-                                    <select id="task-dialog-to">
-                                        {users.map(u => (!u.is_superuser && u.id != user.id) && <option>{u.email}</option>)}
-                                    </select>
-                                </p>
-                                <p>
-                                    <label>Description:</label>
-                                    <input id="task-dialog-desc"/>
-                                </p>
-                                <p style={{textAlign: 'end'}}>
-                                    <button onClick={add_task} className="styleBtn styleBtn-outline-ok">
-                                        Apply
-                                    </button>
-                                </p>
-                            </fieldset>
-                        </dialog>
-                        <div style={{overflow: "auto", width: "300px"}}>
-                            {tasks}
-                        </div>
-                        {!inBlackList && <button onClick={show_dialog('task-dialog')} 
-                            className="styleBtn styleBtn-outline-new">Add</button>}
-                    </div>
-                </div>
-            );
-        }
         else if (mode == 'messages') {
             let chats = get_chats().filter(chat => chat.user1 == user.id || chat.user2 == user.id)
                 .map(chat => {
@@ -326,7 +253,7 @@ export default function UserPage(props) {
                 .filter(chat => (chat.user1.id == user.id && chat.user2.username.includes(userFilter)) ||
                     (chat.user2.id == user.id && chat.user1.username.includes(userFilter)));
             panel = (
-                <div>
+                <div style={{width: "100%"}}>
                     {
                         user.id == pageUser.id
                         &&
@@ -365,17 +292,9 @@ export default function UserPage(props) {
 
     function get_drop_menu_struct() {
         let struct = [];
-        let user_tasks = (user.is_staff || user.is_superuser) 
-        && 
-        {title: "My Tasks (in development)", onClick: set_new_mode('tasks-of'), innerText: "My Tasks"};
-        let to_user_tasks = (!user.is_superuser) 
-        && 
-        {title: "Tasks to me (in development)", onClick: set_new_mode('tasks-to'), innerText: "Tasks to me"};
         if ((user.is_staff && !pageUser.is_superuser) || user.id == pageUser.id) {
             struct.push({title: "Settings", onClick: set_new_mode('settings'), innerText: "Settings"});
             struct.push({title: "Reports", onClick: set_new_mode('reports'), innerText: "Reports"});
-            user_tasks && struct.push(user_tasks);
-            to_user_tasks && struct.push(to_user_tasks);
         }
         if (user.id == pageUser.id) {
             struct.push({onClick: set_new_mode('messages'), 

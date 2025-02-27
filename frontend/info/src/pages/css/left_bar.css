@@ -4,3 +4,10 @@
     border: 1px solid black;
     overflow: auto;
 }
+
+@media screen and (max-width: 1200px) {
+    .pages-leftBar {
+        width: 30%;
+    }
+}
+

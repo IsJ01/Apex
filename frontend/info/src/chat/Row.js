@@ -16,9 +16,6 @@ export default function Row(props) {
             <label className="row-username">
                 {props.user.username}
             </label>
-            <label className="row-email">
-                {props.user.email}
-            </label>
         </div>
     );
 }

@@ -1,5 +1,7 @@
 package com.tasks.api.dto;
 
+import java.time.LocalDate;
+
 import com.tasks.api.database.entity.Status;
 
 import lombok.Value;
@@ -8,7 +10,13 @@ import lombok.Value;
 public class TaskReadDto {
     Integer id;
     Integer of;
-    Integer near;
+    Integer responsible;
+    String title;
     String description;
+    FileInfoReadDto file;
+    LocalDate firstDate;
+    LocalDate lastDate;
+    Boolean checked;
+    Boolean repetitive;
     Status status;
 }

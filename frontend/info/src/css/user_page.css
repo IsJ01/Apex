@@ -14,6 +14,7 @@
 }
 
 .settings-panel-input {
+    width: 200px;
     border-radius: 3px;
     border: 1px solid rgb(64, 22, 22);
 }
@@ -101,4 +102,57 @@
     background: none;
     border: none;
     padding: 0px;
+}
+
+@media screen and (max-width: 900px) {
+    .settings-panel {
+        width: 50%;
+    }
+    .user-page {
+        display: block;
+    }
+    .user-info {
+        width: 100%;
+        height: 60%;
+    }
+    .user-central-panel {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .user-page {
+        display: block;
+        width: 100%;
+    }
+    .user-info {
+        width: 100%;
+        height: 100%;
+    }
+    .user-central-panel {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-height: 575px) {
+    .user-page {
+        display: block;
+        width: 100%;
+    }
+    .user-info {
+        width: 100%;
+        height: 200%;
+    }
+    .user-central-panel {
+        width: 100%;
+        height: 200%;
+        display: flex;
+        justify-content: center;
+    }
 }

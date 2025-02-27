@@ -49,11 +49,11 @@ export default function Chats(props) {
         }
     });
     return (
-        <div style={{display: "flex"}}>
+        <div className="chats-cont">
             <div className="chats">
                 {chats}
             </div>
-            <div id="chat">
+            <div id="chat" className="chat-cont">
                 {current_chat(chat, user)}
             </div>
         </div>

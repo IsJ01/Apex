@@ -7,6 +7,7 @@ const data_api_url = "http://127.0.0.1:8004";
 const user_categories_api_url = "http://127.0.0.1:8005";
 const report_categories_api_url = "http://127.0.0.1:8006";
 const tasks_api_url = "http://127.0.0.1:8007/api/v1";
+const task_status_api_url = "http://127.0.0.1:8007/api/v1/statuses";
 const chats_api_url = "http://127.0.0.1:8008/api/v1/chats";
 const messages_api_url = "http://127.0.0.1:8008/api/v1/messages";
 const tables_api_url = "http://127.0.0.1:8009/api/v1/tables";
@@ -47,6 +48,7 @@ let get_elements = get_objects(elements_api_url);
 let get_properties = get_objects(props_api_url);
 let get_cols = get_objects(cols_api_url);
 let get_tabs = get_objects(tabs_api_url);
+let get_statuses = get_objects(task_status_api_url);
 
 
 function get_user(id) {
@@ -140,7 +142,7 @@ export {
     get_services, get_rows, get_fields,get_users, get_reports, get_black_list, get_user_categories, get_report_categories, 
     get_organization_data, get_user, get_user_from_email, get_report, get_black_user, get_user_category, get_report_category, 
     get_data_field, get_tasks, get_chats, get_messages, get_pages, get_elements, get_properties, get_page_tree_by_id, get_page_by_id,
-    isPageExist, get_pages_tree, get_cols, get_tabs, get_service_by_id, get_service_by_name
+    isPageExist, get_pages_tree, get_cols, get_tabs, get_service_by_id, get_service_by_name, get_statuses
 }
 
 

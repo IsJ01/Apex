@@ -16,6 +16,7 @@ import apply from "./apply.js";
 
 function add(parent, id, value, setRightContent, setCurrentObj, props, req, childrens) {
 
+    // если элемент существует, то он не должен отрисовывается
     if (document.getElementById(`tag_${id}`) && id !== -1) {
         return
     }
@@ -31,10 +32,8 @@ function add(parent, id, value, setRightContent, setCurrentObj, props, req, chil
     if (Object.keys(req).length === 0) {
         new_row.setAttribute("req", "{}");
     } else {
-        console.log(req)
         new_row.setAttribute("req", JSON.stringify(req));
     }
-
 
     let cont = document.createElement("div");
     cont.className = "row-cont"
@@ -99,6 +98,7 @@ function add(parent, id, value, setRightContent, setCurrentObj, props, req, chil
 
     let child = document.createElement("ul");  
 
+    // рекурсивное добавление дочерних элементов
     for (let el of childrens) {
         add(child, el.id, el.value, setRightContent, setCurrentObj, ...get_props(el.properties), el.childrens);
     }
@@ -126,17 +126,20 @@ function delete_page(id) {
     });
 }
 
+// компонент редактирования страницы
 export default function NewPagesContent(props) {
 
+    // переменная хранит в себе id страницы
     let id = props.id;
 
     const [currentObj, setCurrentObj] = useState();
 
     useEffect(() => {
+        // если страница уже сущетсвует, то компонент заполняется ее элементами
         let parent = document.getElementById("elements-form-list");
         props.id && get_page_tree_by_id(props.id).childrens.map(tag => add(parent, tag.id, tag.value, props.setRightContent, 
             setCurrentObj, ...get_props(tag.properties), tag.childrens));
-
+        
         let input_name = document.getElementById("new-form-entry");
         if (input_name) {
             input_name.remove();
@@ -161,18 +164,20 @@ export default function NewPagesContent(props) {
                 onClick={() => delete_page(props.id)} className="styleBtn styleBtn-outline-danger">Delete</button>
             </dialog>
             <AddPropFieldDialog obj={currentObj}/>
-            <div style={{display: "flex", height: "25px", marginBottom: "20px"}}>
+            <div style={{height: '50px', display: "flex", marginBottom: "20px"}}>
                 <div id="new-pages-form" className="new-pages-form">
                     <label htmlFor="new-form-entry" id="newpa" style={{width: "55px"}}>Name: </label>
                     &nbsp;
                 </div>
-                {props.id && <button onClick={() => document.getElementById("delete-dialog").showModal()} 
+                {props.id && <button style={{marginTop: "23px"}} onClick={() => document.getElementById("delete-dialog").showModal()} 
                 className="styleBtn styleBtn-outline-danger">Delete</button>}
             </div>
+            {/* список элементов */}
             <div className="elements-form">
                 <ul className="elements-form-list" id="elements-form-list">
                 </ul>
                 <label style={{display: "flex"}}>Elements:&nbsp;&nbsp;
+                    {/* кнопка добавления элемента */}
                     <NewButton onClick={() => {
                         let parent = document.getElementById("elements-form-list");
                         add(parent, -1, "div", props.setRightContent, setCurrentObj, {}, {}, []);

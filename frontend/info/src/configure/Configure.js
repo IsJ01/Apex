@@ -77,6 +77,8 @@ export default function Configure(props) {
         select({target: {value: "Organization"}})
     }, []);
 
+    document.title = "Configure";
+
     // функция предоставляет нам авторизованного пользователя
     function update_user() {
         let sessionid = get_sessionid();

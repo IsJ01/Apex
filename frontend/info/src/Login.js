@@ -18,6 +18,8 @@ export default function Login() {
         document.title = 'Login';
         updateUser();
     }, []);
+    
+    document.title = "Login";
 
     function updateUser() {
         let sessionid = get_sessionid();

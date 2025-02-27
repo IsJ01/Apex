@@ -1,9 +1,11 @@
 package com.tasks.api.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.tasks.api.database.entity.Status;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 
@@ -15,11 +17,21 @@ public class TaskCreateEditDto {
     Integer of;
 
     @NotNull
-    Integer near;
+    Integer responsible;
 
     @NotNull
-    @Size(min = 3, max = 1000)
+    @NotEmpty
+    String title;
+
     String description;
+
+    Boolean repetitive;
+
+    Boolean checked;
+
+    MultipartFile file;
+
+    String lastDate;
 
     Status status;
 }

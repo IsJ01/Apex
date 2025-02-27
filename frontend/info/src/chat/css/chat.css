@@ -1,8 +1,8 @@
 .chat {
     border: 1px solid black;
-    width: 875px;
-    height: 650px;
+    width: 100%;
     margin-left: 25px;
     border-radius: 7px;
     overflow-y: auto;
+    height: 100%;
 }

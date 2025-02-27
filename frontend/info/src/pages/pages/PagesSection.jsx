@@ -7,6 +7,7 @@ import NewPagesContent from "./NewPagesContent.jsx";
 function setPagesContent(setContent, setRightContent) {
     document.getElementById("rightBar").style.display = "block";
     document.getElementById("pages-central").style.width = "60%";
+    // очищение списка элементов
     let lst = document.getElementById("elements-form-list");
     if (lst) {
         lst.innerHTML = "";
@@ -14,6 +15,7 @@ function setPagesContent(setContent, setRightContent) {
     setContent(<NewPagesContent setRightContent={setRightContent}/>);
 }
 
+// функция отвечает за заполнение центрального окна для изменения страницы
 function editPage(setContent, id, setRightContent) {
     document.getElementById("rightBar").style.display = "block";
     document.getElementById("pages-central").style.width = "60%";
@@ -24,12 +26,14 @@ function editPage(setContent, id, setRightContent) {
     setContent(<NewPagesContent id={id} setRightContent={setRightContent}/>);
 }
 
+// секция страниц
 export default function PagesSection(props) {
 
     return (
         <div className="pages-section">
             <div className="pages-section-title">
                 <label>Counts: {get_pages().length}</label>
+                {/* Данная кнопка меняет центральное окно для создания новой страницы */}
                 <div onClick={() => setPagesContent(props.setContent, props.setRightContent)} 
                     title="new page" className="new-page-btn">+</div>
             </div>

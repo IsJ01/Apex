@@ -9,6 +9,8 @@ export default function Pages() {
     const [centralContent, setCentralContent] = useState();
     const [rightContent, setRightContent] = useState();
 
+    document.title = "Pages";
+
     return (
         <div className="pages">
             <LeftBar setContent={setCentralContent} setRightContent={setRightContent}/>
