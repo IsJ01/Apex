@@ -15,8 +15,23 @@ export default function Task(props) {
     let description = props.data.description;
 
     useEffect(() => {
-        document.getElementById("task-select").value = props.data.status;
-        document.getElementById("task-repetitive-sel").value = get_repetitive(props.data.repetitive);
+        if (props.data.checked === false && props.data.responsible === props.user.id) {
+            let data = new FormData();
+            data.append("checked", true);
+            axios.patch(`${tasks_api_url}/check/${props.data.id}/`, data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "sessionid": get_sessionid()
+                }
+            }).then(() => {
+                let row = document.getElementById(`task-delete-dialog-${props.data.id}`).parentElement;
+                row.className = "task-row";
+            });
+        }
+        if (props.user.id === props.data.of) {
+            document.getElementById("task-select").value = props.data.status;
+            document.getElementById("task-repetitive-sel").value = get_repetitive(props.data.repetitive);
+        }
 
         if (!document.getElementById("task-period")) {
             let span = document.createElement('span');
@@ -188,20 +203,26 @@ export default function Task(props) {
                 ?
                 <>
                     <span onClick={() => download_file(props.data.file)} className="task-file">{props.data.file.fileName}</span>
-                    <label>
+                    {props.user.id === props.data.of &&
+                        <label>
+                            <input onChange={send_file} style={{display: "none"}} id="new-file-inp" type="file"/>
+                            <label title="Set" onClick={set_new_file} className="set-file-btn">
+                                <img width={25} height={20} src={arrow}/>
+                            </label>
+                        </label>
+                    }
+                </>
+                :
+                <>
+                    {props.user.id === props.data.of &&
+                        <label>
                         <input onChange={send_file} style={{display: "none"}} id="new-file-inp" type="file"/>
                         <label title="Set" onClick={set_new_file} className="set-file-btn">
                             <img width={25} height={20} src={arrow}/>
                         </label>
                     </label>
+                    }
                 </>
-                :
-                <label>
-                    <input onChange={send_file} style={{display: "none"}} id="new-file-inp" type="file"/>
-                    <label title="Set" onClick={set_new_file} className="set-file-btn">
-                        <img width={25} height={20} src={arrow}/>
-                    </label>
-                </label>
                 }
             </div>
             <div className="task-field">

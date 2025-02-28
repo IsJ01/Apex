@@ -126,10 +126,46 @@ function get_service_by_id(id) {
     return page;
 }
 
-
 function get_service_by_name(name) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${services_api_url}/service/${name}/`, false);
+    xhr.send();
+    let page = JSON.parse(xhr.responseText);
+    return page;
+}
+
+function get_task_params(filter) {
+    return `of=${filter.of}&` + 
+    `title=${filter.title}&` + 
+    `responsible=${filter.responsible}&` + 
+    `firstDate=${filter.firstDate}&` + 
+    `lastDate=${filter.lastDate}&` + 
+    `status=${filter.status}&` + 
+    `repetitive=${filter.repetitive}`;
+}
+
+function get_task_filter_params(filter) {
+    let of = filter.of ? get_user_from_email(filter.of).id : "";
+    return get_task_params({...filter, of: of})
+}
+
+function get_task_filter_params_of(filter) {
+    let of = filter.of ? get_user_from_email(filter.of).id : "";
+    let responsible = filter.responsible ? get_user_from_email(filter.responsible).id : "";
+    return get_task_params({...filter, of: of, responsible: responsible})
+}
+
+function get_filter_tasks(filter) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${tasks_api_url}/?${get_task_filter_params(filter)}`, false);
+    xhr.send();
+    let page = JSON.parse(xhr.responseText);
+    return page;
+}
+
+function get_filter_tasks_of(filter) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `${tasks_api_url}/?${get_task_filter_params_of(filter)}`, false);
     xhr.send();
     let page = JSON.parse(xhr.responseText);
     return page;
@@ -142,7 +178,8 @@ export {
     get_services, get_rows, get_fields,get_users, get_reports, get_black_list, get_user_categories, get_report_categories, 
     get_organization_data, get_user, get_user_from_email, get_report, get_black_user, get_user_category, get_report_category, 
     get_data_field, get_tasks, get_chats, get_messages, get_pages, get_elements, get_properties, get_page_tree_by_id, get_page_by_id,
-    isPageExist, get_pages_tree, get_cols, get_tabs, get_service_by_id, get_service_by_name, get_statuses
+    isPageExist, get_pages_tree, get_cols, get_tabs, get_service_by_id, get_service_by_name, get_statuses, get_filter_tasks,
+    get_filter_tasks_of
 }
 
 

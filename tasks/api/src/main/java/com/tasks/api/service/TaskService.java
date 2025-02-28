@@ -15,6 +15,7 @@ import com.tasks.api.database.repository.TaskRepository;
 import com.tasks.api.dto.TaskCreateEditDto;
 import com.tasks.api.dto.TaskFilter;
 import com.tasks.api.dto.TaskReadDto;
+import com.tasks.api.mapper.LocalDateMapepr;
 import com.tasks.api.mapper.TaskCreateEditMapper;
 import com.tasks.api.mapper.TaskReadMapper;
 
@@ -28,6 +29,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskReadMapper taskReadMapper;
     private final TaskCreateEditMapper taskCreateEditMapper;
+    private final LocalDateMapepr localDateMapepr;
 
     public List<TaskReadDto> findAll() {
         return taskRepository.findAll().stream()
@@ -38,10 +40,12 @@ public class TaskService {
     public Page<TaskReadDto> findAll(TaskFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.getOf(), task.of::eq)
+                .add(filter.getTitle(), task.title::contains)
                 .add(filter.getResponsible(), task.responsible::eq)
+                .add(localDateMapepr.map(filter.getFirstDate()), task.firstDate::after)
+                .add(localDateMapepr.map(filter.getLastDate()), task.lastDate::before)
                 .add(filter.getRepetitive(), task.repetitive::eq)
                 .add(filter.getChecked(), task.checked::eq)
-                .add(filter.getDescription(), task.description::containsIgnoreCase)
                 .add(filter.getStatus(), task.status::in)
                 .build();
         return taskRepository.findAll(predicate, pageable)

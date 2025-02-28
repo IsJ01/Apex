@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { get_tasks } from "../give_objects";
+import { get_filter_tasks } from "../give_objects";
 import TaskRow from "./TaskRow.jsx";
 
 export default function UserTasks(props) {
 
     const [task, setTask] = useState();
     
-    let tasks = get_tasks().content.map(t => <TaskRow user={props.user} setTask={setTask} data={t}/>);
+    let filter = structuredClone(props.filter);
+    
+    filter.of = props.user.email ? props.user.email : -1;
+    let tasks = get_filter_tasks(filter).content.map(t => <TaskRow user={props.user} setTask={setTask} data={t}/>);
 
     return (
         <div className="tasks-container">

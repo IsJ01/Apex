@@ -91,7 +91,8 @@ public class TaskRestContoller {
             if (UsersUrlConnection.is_superUser(task.getResponsible())) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            boolean is_current = UsersUrlConnection.is_current(sessionid, task.getOf());
+            var of = taskService.findById(id).get().getOf();
+            boolean is_current = UsersUrlConnection.is_current(sessionid, of);
             if (is_current) {
                 return new ResponseEntity<>(taskService.update(id, task)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)),
@@ -110,7 +111,8 @@ public class TaskRestContoller {
             if (UsersUrlConnection.is_superUser(task.getResponsible())) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            boolean is_current = UsersUrlConnection.is_current(sessionid, task.getOf());
+            var of = taskService.findById(id).get().getOf();
+            boolean is_current = UsersUrlConnection.is_current(sessionid, of);
             if (is_current) {
                 return new ResponseEntity<>(taskService.patch(id, task)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)),
@@ -122,6 +124,26 @@ public class TaskRestContoller {
         }
     }
     
+    @PatchMapping("/check/{id}/")
+    public ResponseEntity<?> check(@PathVariable Integer id, @ModelAttribute TaskCreateEditDto task,
+                        @RequestHeader("Sessionid") String sessionid) {
+        try {
+            if (UsersUrlConnection.is_superUser(task.getResponsible())) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            var responsible = taskService.findById(id).get().getResponsible();
+            boolean is_current = UsersUrlConnection.is_current(sessionid, responsible);
+            if (is_current) {
+                return new ResponseEntity<>(taskService.patch(id, task)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)),
+                    HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @DeleteMapping("/{id}/")
     public ResponseEntity<?> delete(@PathVariable Integer id, 
                                 @RequestHeader("Sessionid") String sessionid) {

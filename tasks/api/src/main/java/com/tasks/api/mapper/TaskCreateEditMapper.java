@@ -21,6 +21,7 @@ public class TaskCreateEditMapper implements Mapper<TaskCreateEditDto, Task> {
 
     private final FileInfoService fileService;
     private final FileInfoRepository fileInfoRepository;
+    private final LocalDateMapepr localDateMapepr;
 
     @Override
     public Task map(TaskCreateEditDto object) {
@@ -46,11 +47,7 @@ public class TaskCreateEditMapper implements Mapper<TaskCreateEditDto, Task> {
             task.setDescription(dto.getDescription());
         }
         if (dto.getLastDate() != null) {
-            if (!dto.getLastDate().isEmpty()) {
-                task.setLastDate(LocalDate.parse(dto.getLastDate()));
-            } else {
-                task.setLastDate(null);
-            }
+            task.setLastDate(localDateMapepr.map(dto.getLastDate()));
         }
         if (dto.getChecked() != null) {
             task.setChecked(dto.getChecked());
@@ -88,7 +85,7 @@ public class TaskCreateEditMapper implements Mapper<TaskCreateEditDto, Task> {
             .orElse(null);
 
         LocalDate date = Optional.ofNullable(dto.getLastDate())
-            .map(LocalDate::parse)
+            .map(localDateMapepr::map)
             .orElse(null);
         Status status = Optional.ofNullable(dto.getStatus())
             .orElse(Status.IN_PROGRESS);

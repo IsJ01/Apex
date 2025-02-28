@@ -21,9 +21,13 @@ function deleteTask(id) {
 export default function TaskRow(props) {
 
     let responsible = get_user(props.data.responsible);
+    let className = "task-row";
+    if ((props.user.id === props.data.responsible) && !props.data.checked) {
+        className = "task-row task-row-unchecked"
+    } 
 
     return (
-        <div onClick={() => selectTask(props.setTask, props.user, props.data, responsible)} className="task-row">
+        <div onClick={() => selectTask(props.setTask, props.user, props.data, responsible)} className={className}>
             <DeleteDialog id={props.data.id} onDelete={(e) => {e.stopPropagation(); deleteTask(props.data.id)}}/>
             <label className="task-row-text task-row-title">
                 {props.data.title}
@@ -32,12 +36,13 @@ export default function TaskRow(props) {
                 {responsible.email}
             </label>
             &nbsp;
-            <div title="Delete"
+            {props.data.of == props.user.id &&
+                <div title="Delete"
                 className="task-config-btn">
                 <img onClick={(e) => {e.stopPropagation(); 
                 document.getElementById(`task-delete-dialog-${props.data.id}`).showModal()}}  
                 width={17} height={17} src={del}/>
-            </div>
+            </div>}
         </div>
     );
 }
