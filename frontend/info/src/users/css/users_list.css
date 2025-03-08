@@ -1,0 +1,149 @@
+.users-list-page {
+    margin-top: 51px;
+}
+
+.users-list {
+    margin: 70px auto;
+    padding-left: 20px;
+    width: 50%;
+    overflow: auto;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    width: 210px;
+}
+
+.users-select {
+    width: 75px;
+}
+
+.search {
+    width: 125px;
+}
+
+.users-select, .search {
+    height: 23px;
+}
+
+.filter-dialog {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.dialog-buttons {
+    width: 120px;
+    margin-left: 220px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.statistics {
+    display: flex;
+}
+
+.statistics-cont {
+    margin: 0 auto;
+}
+
+.users-rows {
+    max-height: 40vh;
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.statistic-row {
+    background: rgb(238, 238, 238);
+    width: 400px;
+    display: flex;
+    padding: 3px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.statistic-row:hover {
+    border: 1px solid rgb(28, 22, 22);
+    box-shadow: 0px 0px 2px 0px;
+    cursor: pointer;
+}
+
+.statistic-row-field {
+    margin-left: 50px;
+}
+
+.statistic-row-name {
+    width: 100px;
+    overflow: auto;
+}
+
+@media screen and (max-width: 1250px) {
+    .users-list {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .users-list {
+        width: 85%;
+    }
+    .table-row, .table-header {
+        height: 45px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .statistics-cont {
+        width: 100%;
+    }
+    .statistic-panel {
+        display: flex;
+        justify-content: center;
+    }
+    .statistic-panel canvas {
+        width: 300px !important;
+        height: 300px !important;
+    }
+    .users-rows {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .statistic-row {
+        width: 300px;
+    }
+    .statistic-row-field {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .statistic-panel canvas {
+        width: 250px !important;
+        height: 250px !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .statistic-row {
+        width: 250px;
+    }
+    .statistic-row-field {
+        margin-left: 10px;
+    }
+    .statistic-row-name {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .statistic-row {
+        width: 200px;
+    }
+    .statistic-row-field {
+        margin-left: 0px;
+    }
+}
+

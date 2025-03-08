@@ -10,7 +10,8 @@ import ToUserTasks from "./ToUserTasks";
 import { get_sessionid } from "../get_cookies";
 import TaskFilterDialog from "./TaskFilterDialog";
 
-import del from "./img/Delete.png";
+import del from "../img/Delete.png";
+import text from "./text";
 
 function show_dialog() {
     document.getElementById("new-task-dialog").showModal();
@@ -59,19 +60,19 @@ export default function TasksPage(props) {
                 <div className="tasks-page">
                     <div className="tasks-menu">
                         <div onClick={() => show_dialog()} className="menu-title">
-                            New taks +
+                            {text[props.lang].newTask}
                         </div>
                         <div onClick={() => setContent("your")} className="menu-title">
-                            Your tasks
+                            {text[props.lang].your}
                         </div>
                         {!user.is_superuser &&
                             <div onClick={() => setContent("to-you")} className="menu-title">
-                            Tasks to you
+                            {text[props.lang].toTou}
                             </div>
                         }
                         <div style={{display: "flex"}} 
                             onClick={() => {document.getElementById("task-filter-dialog").showModal()}} className="menu-title">
-                            Filter&nbsp;
+                            {text[props.lang].filter}&nbsp;
                             <div>
                                 <img onClick={(e) => {e.stopPropagation();setFilter(filter_def)}} width={15} height={15} src={del}/>
                             </div>

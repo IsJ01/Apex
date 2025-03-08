@@ -43,22 +43,22 @@ function writeFullMenu(props) {
     let options = document.createElement("p");
     options.className = "options";
 
-    options.appendChild(getLangBox(["Русский (Rus)", "English (UK)"], props.lang, props.onSelectLang));
+    options.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.lang, props.onSelectLang));
     menuBar.appendChild(options);
 
     if (user.is_superuser || user.is_staff) {
         options.appendChild(getBtnElement("/configure/", text.confBtnTitle, text.confBtn));
     }
 
-    for (let btn of [["/", text.homeBtn, text.homeBtnTitle], ["/pages/", text.pages, text.pagesTitle], 
+    for (let btn of [
+        // ["/", text.homeBtn, text.homeBtnTitle], 
+        ["/pages/", text.pages, text.pagesTitle], 
         ["/tasks/", text.tasks, text.tasksTitle], ["/users/", text.usersBtn, text.usersBtnTitle]]) {
             options.appendChild(getBtnElement(btn[0], btn[1], btn[2]));
     }
 
     if (user.is_authenticated) {
-        if (user.is_staff) {
-            options.appendChild(getBtnElement("/reports/", text.reportsBtn, text.reportsBtnTitle));
-        }
+        options.appendChild(getBtnElement("/reports/", text.reportsBtn, text.reportsBtnTitle));
         options.appendChild(getBtnElement("/blackList/",  text.blackBtn, text.blackBtnTitle));
     }
 
@@ -140,7 +140,9 @@ function writeDropMenu(props) {
         droptMenuCont.appendChild(getDropMenuEl("/configure/", text.confBtnTitle, text.confBtn));
     }
 
-    let els = [["/", text.homeBtn, text.homeBtnTitle], ["/pages/", text.pages, text.pagesTitle], 
+    let els = [
+        // ["/", text.homeBtn, text.homeBtnTitle], 
+        ["/pages/", text.pages, text.pagesTitle], 
         ["/tasks/", text.tasks, text.tasksTitle], ["/users/", text.usersBtn, text.usersBtnTitle]];
 
     if (props.width < 375) {
@@ -155,9 +157,7 @@ function writeDropMenu(props) {
             p.appendChild(userLabel);
         }
 
-        if (user.is_staff) {
-            els.push(["/reports/", text.reportsBtn, text.reportsBtnTitle]);
-        }
+        els.push(["/reports/", text.reportsBtn, text.reportsBtnTitle]);
         els.push(["/blackList/",  text.blackBtn, text.blackBtnTitle]);
         let logoutBtn = document.createElement("button");
         logoutBtn.className = "user_btn styleBtn styleBtn-outline-red";
@@ -192,7 +192,7 @@ function writeDropMenu(props) {
     menuBar.className = "menu-bar";
 
 
-    menuBar.appendChild(getLangBox(["Русский (Rus)", "English (UK)"], props.lang, props.onSelectLang))
+    menuBar.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.lang, props.onSelectLang))
     menuBar.appendChild(dropMenu);
     menuBarCont.appendChild(p);
     menuBar.appendChild(menuBarCont)

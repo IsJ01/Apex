@@ -7,8 +7,8 @@ import axios from "axios";
 import { show_change } from "./show_info";
 
 import arrow from "./img/Arrow.png";
-import eye from "./img/Eye.png";
-import notEye from "./img/NotEye.png";
+import eye from "../img/Eye.png";
+import notEye from "../img/NotEye.png";
 
 export default function Task(props) {
 

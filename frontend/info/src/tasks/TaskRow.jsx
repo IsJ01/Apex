@@ -3,7 +3,7 @@ import { get_user, tasks_api_url } from "../give_objects";
 import { get_sessionid } from "../get_cookies";
 import Task from "./Task";
 
-import del from "./img/Delete.png";
+import del from "../img/Delete.png";
 import DeleteDialog from "./DeleteDialog";
 
 function selectTask(func, user, data, responsible) {
@@ -36,7 +36,7 @@ export default function TaskRow(props) {
                 {responsible.email}
             </label>
             &nbsp;
-            {props.data.of == props.user.id &&
+            {props.data.of === props.user.id &&
                 <div title="Delete"
                 className="task-config-btn">
                 <img onClick={(e) => {e.stopPropagation(); 

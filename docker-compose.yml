@@ -36,12 +36,6 @@ services:
     ports:
       - "8005:8005"
 
-  report_categories:
-    build:
-      context: ./reportCategories
-    ports:
-      - "8006:8006"
-
   tasks_db:
     image: postgres
     environment:

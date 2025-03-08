@@ -16,7 +16,7 @@ public class UsersUrlConnection {
     public static boolean is_current(String sessionid, Integer id) throws Exception {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:8001/current/"))
+            .uri(URI.create("http://users:8001/current/"))
             .header("sessionid", sessionid)
             .GET()
             .build();

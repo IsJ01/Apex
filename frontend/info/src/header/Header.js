@@ -66,6 +66,9 @@ export default function Header(props) {
         }
         document.getElementById("header").appendChild(getMenuBar({user: user, logout: logout, 
             text: text, lang: props.lang, onSelectLang: onSelectLang, width: window.innerWidth}));
+        document.getElementById("lang-select").onchange = e => {
+            props.setLang(e.target.value);
+        }
     }
 
     return (

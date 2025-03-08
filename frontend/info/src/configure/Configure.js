@@ -6,7 +6,7 @@ import SideBar from '../reusable/SideBar.js';
 import './css/configure.css';
 import './css/fields.css';
 import CancelButton from "../reusable/CancelButton.js";
-import { get_black_list } from "../give_objects.js";
+import { get_black_list, report_categories_api_url } from "../give_objects.js";
 import Cell from "./Cell.js";
 import { getConfigurationText } from "../getText.js";
 
@@ -68,7 +68,6 @@ export default function Configure(props) {
     const users_api_url = "http://127.0.0.1:8001";
     const data_api_url = "http://127.0.0.1:8004";
     const user_categories_api_url = "http://127.0.0.1:8005";
-    const report_categories_api_url = "http://127.0.0.1:8006";
     let headers = [];
     let text = getConfigurationText(props.lang);
 

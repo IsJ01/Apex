@@ -6,11 +6,8 @@ import { get_sessionid } from "./get_cookies";
 import './css/user_page.css';
 import user_img from './img/User.png';
 import CancelButton from "./reusable/CancelButton";
-import Report from "./reusable/Report";
-import {get_black_list, get_chats, get_report_categories, get_report_category, get_reports, get_tasks, get_user, get_user_from_email, get_users} from './give_objects';
+import {get_black_list, get_chats, get_user, get_users} from './give_objects';
 import DropMenu from "./reusable/DropMenu";
-import { tasks_api_url } from "./give_objects";
-import Task from "./reusable/Task";
 import SearchBar from "./chat/SearchBar";
 import AddChatDialog from "./chat/AddChatDialog";
 import Chats from "./chat/Chats";
@@ -25,8 +22,6 @@ export default function UserPage(props) {
     const [inBlackList, setInBlackList] = useState(false);
     const [userFilter, setUserFilter] = useState("");
     const users_api_url = 'http://localhost:8001';
-    const reports_api_url = "http://127.0.0.1:8002";
-    const report_categories_api_url = "http://127.0.0.1:8006";
     useEffect(() => {
         updateUser();
         get_page_user();
@@ -120,27 +115,6 @@ export default function UserPage(props) {
         }
     }
 
-    // функция добавления отчета
-    function add_report() {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", `${report_categories_api_url}/`, false);
-        xhr.send();
-        let categories = JSON.parse(xhr.responseText);
-        xhr.open("GET", `${users_api_url}/`, false);
-        xhr.send();
-        let users = JSON.parse(xhr.responseText);
-        let to = document.getElementById('report-dialog-to').value;
-        let category = document.getElementById('report-dialog-category').value;
-        let title = document.getElementById('report-dialog-title').value;
-        let details = document.getElementById('report-dialog-details').value;
-        let to_user = users.filter(user => user.email == to)[0];
-        let cat = categories.filter(cat => cat.name == category)[0];
-        axios.post(`${reports_api_url}/`, {title: title, to: to_user.id, of: user.id, 
-            category: cat.id, description: details},
-            {headers: {sessionid: get_sessionid()}})
-        window.location.reload(true);
-    }
-
     // функция отображения центральной панели
     function get_central_panel(mode) {
 
@@ -186,7 +160,7 @@ export default function UserPage(props) {
                     <p>
                         <label>profile photo</label>
                         <input style={{visibility: 'hidden', position: 'absolute'}} id="image-input" 
-                        type="file" accept="images/*"/> 
+                        type="file" accept="images/*" className="settings-panel-input"/> 
                         <label htmlFor="image-input" style={{width: '90px'}}>
                             <span title="Choose image" className="styleBtn styleBtn-outline-red-2">Choose</span>
                         </label>
@@ -194,49 +168,6 @@ export default function UserPage(props) {
                         className="styleBtn styleBtn-outline-danger" value="Delete"/>
                     </p>
                     <button onClick={apply} className="styleBtn styleBtn-outline-red-2">Apply</button>
-                </div>
-            );
-        }
-        else if (mode == 'reports') {
-            let users = get_users();
-            let categories = get_report_categories();
-            let reports = get_reports();
-            panel = (
-                <div style={{marginTop: '20px', marginLeft: '20px'}}>
-                    <div>
-                        <dialog id="report-dialog">
-                            <CancelButton func={close_dialog('report-dialog')}/>
-                            <fieldset>
-                                <p>
-                                    <label>title:</label>
-                                    <input id="report-dialog-title"/>
-                                </p>
-                                <p>
-                                    <label>To:</label>
-                                    <select id="report-dialog-to">
-                                        {users.map(u => (!u.is_superuser && u.id != user.id) && <option>{u.email}</option>)}
-                                    </select>
-                                </p>
-                                <p>
-                                    <label>Category:</label>
-                                    <select id="report-dialog-category">
-                                        {categories.map(cat => <option>{cat.name}</option>)}
-                                    </select>
-                                </p>
-                                <p>
-                                    <label>Details:</label>
-                                    <input id="report-dialog-details"/>
-                                </p>
-                                <p style={{textAlign: 'end'}}><button onClick={add_report} className="styleBtn styleBtn-outline-ok">Apply</button></p>
-                            </fieldset>
-                        </dialog>
-                        <p>{((user.is_staff || user.is_superuser) && user.id != pageUser.id) ? "From user:" : "From me:"}</p>
-                        {reports.map(report => (report.of == pageUser.id) && 
-                        <Report title={report.title} to={get_user(report.to).email}
-                        category={get_report_category(report.category).name} details={report.description} status={report.status}/>)}
-                        {(pageUser.id == user.id && !inBlackList) && 
-                        <button className="styleBtn styleBtn-outline-new" onClick={show_dialog('report-dialog')}>Add</button>}
-                    </div>
                 </div>
             );
         }
@@ -294,7 +225,6 @@ export default function UserPage(props) {
         let struct = [];
         if ((user.is_staff && !pageUser.is_superuser) || user.id == pageUser.id) {
             struct.push({title: "Settings", onClick: set_new_mode('settings'), innerText: "Settings"});
-            struct.push({title: "Reports", onClick: set_new_mode('reports'), innerText: "Reports"});
         }
         if (user.id == pageUser.id) {
             struct.push({onClick: set_new_mode('messages'), 

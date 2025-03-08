@@ -1,4 +1,5 @@
 .styleBtn {
+    cursor: pointer;
     line-height: normal;
     background: rgba(255, 255, 255, 0);
     color: rgb(230, 230, 230);
