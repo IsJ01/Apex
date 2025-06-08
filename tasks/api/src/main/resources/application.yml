@@ -6,16 +6,18 @@ logging:
     path: /
 
 server:
-  port: 8007
+  port: ${API_PORT}
   context-path: /
 
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: api
   datasource:
-    url: jdbc:postgresql://localhost:5432/tasks
-    username: isj01
-    password: is067
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
@@ -23,8 +25,8 @@ spring:
         show-sql: true
         format-sql: true
         hbm2ddl:
-          auto: update
+          auto: create
         ddl-auto:
-          update
+          create
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    open-in-view: false
+      open-in-view: false

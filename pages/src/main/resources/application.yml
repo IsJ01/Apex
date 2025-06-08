@@ -6,6 +6,8 @@ server:
   port: 8011
 
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application: 
     name: pages
   datasource:

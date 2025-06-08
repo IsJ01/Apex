@@ -67,7 +67,7 @@ export default function TasksPage(props) {
                         </div>
                         {!user.is_superuser &&
                             <div onClick={() => setContent("to-you")} className="menu-title">
-                            {text[props.lang].toTou}
+                            {text[props.lang].toYou}
                             </div>
                         }
                         <div style={{display: "flex"}} 
