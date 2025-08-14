@@ -4,9 +4,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url("../img/Background.jpg");
+    background-size: cover;
 }
 
-.register-content form p label {
+.register-content div p label {
     width: 150px;
     text-align: start;
+}
+
+.register-content div p input {
+    border-radius: 0px;
+    border: 1px solid gray;
+}
+
+.register-content div p input:focus {
+    outline: none;
 }

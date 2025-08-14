@@ -1,0 +1,13 @@
+server:
+  port: ${PORT}
+  # ssl:
+  #   certificate: ../certs/cert.crt
+  #   certificate-private-key: ../certs/key.key
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: proxy
+
+mode: ${MODE}

@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      id: 2025-08-06-inital-schema
+      file: v-1.0/2025-08-06-inital-schema.yaml
+      relativeToChangelogFile: true
+  - include:
+      id: 2025-08-06-add-columns.yaml
+      file: v-1.0/2025-08-06-add-columns.yaml
+      relativeToChangelogFile: true
+  - include:
+      id: 2025-08-14-add-not-empty-constrains
+      file: v-1.0/2025-08-14-add-not-empty-constrains.yaml
+      relativeToChangelogFile: true

@@ -3,9 +3,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url("../img/Background.jpg");
+    background-size: cover;
 }
 
 .login-content div p label {
     width: 150px;
     text-align: start;
 }
+
+.login-content div p input {
+    border-radius: 0px;
+    border: 1px solid gray;
+}
+
+.login-content div p input:focus {
+    outline: none;
+}
+

@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1"
+      author: Is067
+      changes:
+        - addColumn:
+            tableName: "t_users"
+            columns:
+              - column:
+                  name: telephone_number
+                  type: varchar(255)
+              - column:
+                  name: year
+                  type: Integer
+                  

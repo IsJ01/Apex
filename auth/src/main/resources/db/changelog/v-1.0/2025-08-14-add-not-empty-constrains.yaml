@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1"
+      author: Is067
+      sql:
+        ALTER TABLE t_users ADD CONSTRAINT not_username_empty_constraint CHECK (username IS NOT NULL AND username <> '');
+        ALTER TABLE t_users ADD CONSTRAINT not_password_empty_constraint CHECK (password IS NOT NULL AND password <> '');

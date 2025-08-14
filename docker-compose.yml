@@ -1,16 +1,23 @@
 services:
-  # info:
+  # frontend:
   #  build:
   #    context: ./frontend/info/
   #  ports:
   #    - "3000:3000"
 
-  users:
-    restart: always
-    build:
-      context: ./users
+  auth_db:
+    image: postgres
+    env_file:
+      - ./auth/database.env
     ports:
-      - "8001:8001"
+      - 5437:5432
+
+  # auth:
+  #   restart: always
+  #   build:
+  #     context: ./auth
+  #   ports:
+  #     - "8001:8001"
 
   reports:
     build:
@@ -29,12 +36,6 @@ services:
       context: ./organizationData
     ports:
       - "8004:8004"
-
-  user_categories:
-    build:
-      context: ./userCategories
-    ports:
-      - "8005:8005"
 
   tasks_db:
     image: postgres

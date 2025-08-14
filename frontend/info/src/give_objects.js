@@ -1,13 +1,11 @@
 // модуль для получения объектов из api
-
-import { get_sessionid } from "./get_cookies";
-
-const users_api_url = "http://127.0.0.1:8001";
+const api_url = "http://localhost:80"
+const users_api_url = "/api/auth";
 const reports_api_url = "http://127.0.0.1:8002/api/v1";
 const reports_api_url_clear = "http://127.0.0.1:8002";
 const black_list_api_url = "http://127.0.0.1:8003";
 const data_api_url = "http://127.0.0.1:8004";
-const user_categories_api_url = "http://127.0.0.1:8005";
+
 const report_categories_api_url = "http://127.0.0.1:8002/api/v1/categories";
 const tasks_api_url = "http://127.0.0.1:8007/api/v1";
 const task_status_api_url = "http://127.0.0.1:8007/api/v1/statuses";
@@ -37,7 +35,7 @@ function get_objects(api) {
 let get_users = get_objects(users_api_url);
 let get_reports = get_objects(reports_api_url);
 let get_black_list = get_objects(black_list_api_url);
-let get_user_categories = get_objects(user_categories_api_url);
+// let get_user_categories = get_objects(user_categories_api_url);
 let get_report_categories = get_objects(report_categories_api_url);
 let get_organization_data = get_objects(data_api_url);
 let get_tasks = get_objects(tasks_api_url);
@@ -67,7 +65,7 @@ function get_user_from_email(email) {
 function get_report(id) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `${reports_api_url}/${id}/`, false);
-    xhr.setRequestHeader("sessionid", get_sessionid());
+    xhr.setRequestHeader("sessionid", "");
     xhr.send();
     if (xhr.responseText) {
         return JSON.parse(xhr.responseText);
@@ -80,10 +78,10 @@ function get_black_user(id) {
     return black_list.filter(bu => bu.id === id)[0];
 }
 
-function get_user_category(id) {
-    let user_categories = get_user_categories();
-    return user_categories.filter(cat => cat.id === id)[0];
-}
+// function get_user_category(id) {
+//     let user_categories = get_user_categories();
+//     return user_categories.filter(cat => cat.id === id)[0];
+// }
 
 function get_report_category(id) {
     let report_categories = get_report_categories();
@@ -209,11 +207,12 @@ function get_reports_by_to(id) {
 }
 
 export {
-    users_api_url, reports_api_url, black_list_api_url, user_categories_api_url, report_categories_api_url, data_api_url, 
+    api_url,
+    users_api_url, reports_api_url, black_list_api_url, report_categories_api_url, data_api_url, 
     tasks_api_url, chats_api_url, messages_api_url, tables_api_url, services_api_url, rows_api_url, fields_api_url, 
     pages_api_url, elements_api_url, props_api_url, cols_api_url, tabs_api_url, reports_api_url_clear,
-    get_services, get_rows, get_fields,get_users, get_reports, get_black_list, get_user_categories, get_report_categories, 
-    get_organization_data, get_user, get_user_from_email, get_report, get_black_user, get_user_category, get_report_category, 
+    get_services, get_rows, get_fields,get_users, get_reports, get_black_list, get_report_categories, 
+    get_organization_data, get_user, get_user_from_email, get_report, get_black_user, get_report_category, 
     get_data_field, get_tasks, get_chats, get_messages, get_pages, get_elements, get_properties, get_page_tree_by_id, get_page_by_id,
     isPageExist, get_pages_tree, get_cols, get_tabs, get_service_by_id, get_service_by_name, get_statuses, get_filter_tasks,
     get_filter_tasks_of, get_report_category_by_name, get_reports_by_of, get_reports_by_to

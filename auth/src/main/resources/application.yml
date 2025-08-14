@@ -1,0 +1,39 @@
+server:
+  port: ${SERVER_PORT}
+  # ssl:
+  #   certificate: certificates/cert.crt
+  #   certificate-private-key: certificates/key.pem
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: auth
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+        hibernate:
+          show-sql: true
+          format-sql: true
+          ddl-auto: none
+          hbm2ddl:
+            auto: none
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false 
+  
+token:
+  signing: ${SIGNING_TOKEN}
+
+cors:
+  allowed-host: ${ALLOWED_HOST}
+
+admin:
+  pass: ${ADMIN_PASS}
+  number: ""
+  year: 2000
+
+mode: ${MODE}

@@ -15,8 +15,16 @@
     color: red;
 }
 
-.description {
-    font-size: 20px;
+.home-description {
+    font-size: 23px;
+    width: 45%;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-qualification {
+    font-size: 23px;
     width: 45%;
     text-align: justify;
     margin-left: auto;

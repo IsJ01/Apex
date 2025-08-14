@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "token.signing",
+    "type": "java.lang.String",
+    "description": "A description for 'token.signing'"
+  },
+  {
+    "name": "cors.allowed-host",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed-host'"
+  },
+  {
+    "name": "admin.pass",
+    "type": "java.lang.String",
+    "description": "A description for 'admin.pass'"
+  },
+  {
+    "name": "admin.number",
+    "type": "java.lang.String",
+    "description": "A description for 'admin.number'"
+  },
+  {
+    "name": "admin.year",
+    "type": "java.lang.String",
+    "description": "A description for 'admin.year'"
+  },
+  {
+    "name": "mode",
+    "type": "java.lang.String",
+    "description": "A description for 'mode'"
+  }
+]}

@@ -1,3 +1,6 @@
+import { getHeaderText } from "../getText";
+import getLang from "../getLang";
+
 export function getMenuBar(props) {
     if (props.width >= 1024) {
         return writeFullMenu(props);
@@ -7,19 +10,24 @@ export function getMenuBar(props) {
         
 }
 
-function getLangBox(langs, lang, func) {
+function getLangBox(langs, func) {
+    let lang = getLang();
     let select = document.createElement("select");
     select.className = "select-lang";
 
     select.id = "lang-select";
     select.value = lang;
-    select.onChange = func;
+    select.onchange = func;
 
-    for (let lang of langs) {
+    for (let lan of langs) {
         let option = document.createElement("option");
-        option.innerHTML = lang;
+        option.textContent = lan;
+        if (lan === lang) {
+            option.selected = true;
+        }
         select.appendChild(option);
     }
+
     return select;
 }
 
@@ -27,14 +35,14 @@ function getBtnElement(href, text, title) {
     let a = document.createElement("a");
     a.className = "option styleBtn styleBtn-outline-red";
     a.href = href;
-    a.innerText = text;
+    a.textContent = text;
     a.title = title;
     return a;
 }
 
 function writeFullMenu(props) {
     let user = props.user;
-    let text = props.text;
+    let text = getHeaderText(getLang());
 
     let menuBar = document.createElement("div");
     menuBar.className = "menuBar";
@@ -43,29 +51,29 @@ function writeFullMenu(props) {
     let options = document.createElement("p");
     options.className = "options";
 
-    options.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.lang, props.onSelectLang));
+    options.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.langSelect));
     menuBar.appendChild(options);
 
-    if (user.is_superuser || user.is_staff) {
-        options.appendChild(getBtnElement("/configure/", text.confBtnTitle, text.confBtn));
+    if (user.role === "ADMIN") {
+        options.appendChild(getBtnElement("/configure", text.confBtnTitle, text.confBtn));
     }
 
     for (let btn of [
         // ["/", text.homeBtn, text.homeBtnTitle], 
-        ["/pages/", text.pages, text.pagesTitle], 
-        ["/tasks/", text.tasks, text.tasksTitle], ["/users/", text.usersBtn, text.usersBtnTitle]]) {
+        ["/pages", text.pages, text.pagesTitle], 
+        ["/tasks", text.tasks, text.tasksTitle], ["/users", text.usersBtn, text.usersBtnTitle]]) {
             options.appendChild(getBtnElement(btn[0], btn[1], btn[2]));
     }
 
-    if (user.is_authenticated) {
-        options.appendChild(getBtnElement("/reports/", text.reportsBtn, text.reportsBtnTitle));
-        options.appendChild(getBtnElement("/blackList/",  text.blackBtn, text.blackBtnTitle));
+    if (user.role === "ADMIN") {
+        options.appendChild(getBtnElement("/reports", text.reportsBtn, text.reportsBtnTitle));
+        options.appendChild(getBtnElement("/blackList",  text.blackBtn, text.blackBtnTitle));
     }
 
     let p = document.createElement("p");
     p.className = "login_or_logout";
 
-    if (user.is_authenticated) {
+    if (Object.keys(user).length !== 0) {
         let userLabel = getBtnElement(`/users/${user.id}`, user.username, text.profileTitle);
         userLabel.className = "user_label";
         userLabel.style.color = "rgb(238, 238, 238)";
@@ -74,15 +82,15 @@ function writeFullMenu(props) {
         logoutBtn.className = "user_btn styleBtn styleBtn-outline-red";
         logoutBtn.onclick = props.logout;
         logoutBtn.title = text.logoutBtnTitle;
-        logoutBtn.innerText = text.logoutBtn;
+        logoutBtn.textContent = text.logoutBtn;
 
         p.appendChild(userLabel);
         p.appendChild(logoutBtn);
     } else {
-        let loginBtn = getBtnElement("/login/", text.loginBtn, text.loginBtnTitle);
+        let loginBtn = getBtnElement("/login", text.loginBtn, text.loginBtnTitle);
         loginBtn.className = "user_btn styleBtn styleBtn-outline-red";
 
-        let regBtn = getBtnElement("/register/", text.regBtn, text.regBtnTitle);
+        let regBtn = getBtnElement("/register", text.regBtn, text.regBtnTitle);
         regBtn.className = "user_btn styleBtn styleBtn-outline-red";
 
         p.appendChild(loginBtn);
@@ -97,7 +105,7 @@ function getDropMenuEl(href, text, title) {
     let el = document.createElement("div");
     let link = document.createElement("a");
     link.className = "drop-menu-el";
-    link.innerText = text;
+    link.textContent = text;
     link.href = href;
     link.title = title;
 
@@ -116,8 +124,8 @@ function dropBtnClicked() {
 
 function writeDropMenu(props) {
     let user = props.user;
-    let text = props.text;
-
+    let text = getHeaderText(getLang());
+    
     let menuBar = document.createElement("div");
     menuBar.id = "menuBar";
 
@@ -136,20 +144,21 @@ function writeDropMenu(props) {
     droptMenuCont.style.display = "none";
     droptMenuCont.className = "drop-menu-cont";
 
-    if (user.is_superuser || user.is_staff) {
-        droptMenuCont.appendChild(getDropMenuEl("/configure/", text.confBtnTitle, text.confBtn));
+    if (user.role === "ADMIN") {
+        droptMenuCont.appendChild(getDropMenuEl("/configure", text.confBtnTitle, text.confBtn));
     }
 
     let els = [
         // ["/", text.homeBtn, text.homeBtnTitle], 
-        ["/pages/", text.pages, text.pagesTitle], 
-        ["/tasks/", text.tasks, text.tasksTitle], ["/users/", text.usersBtn, text.usersBtnTitle]];
+        ["/pages", text.pages, text.pagesTitle], 
+        ["/tasks", text.tasks, text.tasksTitle], ["/users", text.usersBtn, text.usersBtnTitle]];
 
     if (props.width < 375) {
         els.push([`/users/${user.id}`, user.username, text.profileTitle]);
     }
 
-    if (user.is_authenticated) {
+
+    if (Object.keys(user).length !== 0) {
         if (props.width >= 375) {
             let userLabel = getBtnElement(`/users/${user.id}`, user.username, text.profileTitle);
             userLabel.className = "user_label";
@@ -157,26 +166,26 @@ function writeDropMenu(props) {
             p.appendChild(userLabel);
         }
 
-        els.push(["/reports/", text.reportsBtn, text.reportsBtnTitle]);
-        els.push(["/blackList/",  text.blackBtn, text.blackBtnTitle]);
+        els.push(["/reports", text.reportsBtn, text.reportsBtnTitle]);
+        els.push(["/blackList",  text.blackBtn, text.blackBtnTitle]);
         let logoutBtn = document.createElement("button");
         logoutBtn.className = "user_btn styleBtn styleBtn-outline-red";
         logoutBtn.onclick = props.logout;
         logoutBtn.title = text.logoutBtnTitle;
-        logoutBtn.innerText = text.logoutBtn;
+        logoutBtn.textContent = text.logoutBtn;
         p.appendChild(logoutBtn);
 
-    } else if (!user.is_authenticated) {
+    } else {
         if (props.width >= 375) {
-            let loginBtn = getBtnElement("/login/", text.loginBtn, text.loginBtnTitle);
+            let loginBtn = getBtnElement("/login", text.loginBtn, text.loginBtnTitle);
             loginBtn.className = "user_btn styleBtn styleBtn-outline-red";
-            let regBtn = getBtnElement("/register/", text.regBtn, text.regBtnTitle);
+            let regBtn = getBtnElement("/register", text.regBtn, text.regBtnTitle);
             regBtn.className = "user_btn styleBtn styleBtn-outline-red";
             p.appendChild(loginBtn);
             p.appendChild(regBtn);
         } else {
-            els.push(["/login/", text.loginBtn, text.loginBtnTitle]);
-            els.push(["/register/", text.regBtn, text.regBtnTitle]);
+            els.push(["/login", text.loginBtn, text.loginBtnTitle]);
+            els.push(["/register", text.regBtn, text.regBtnTitle]);
         }
 
     }
@@ -192,7 +201,7 @@ function writeDropMenu(props) {
     menuBar.className = "menu-bar";
 
 
-    menuBar.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.lang, props.onSelectLang))
+    menuBar.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.langSelect))
     menuBar.appendChild(dropMenu);
     menuBarCont.appendChild(p);
     menuBar.appendChild(menuBarCont)
