@@ -3,8 +3,10 @@ package com.ucor.auth.config;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,7 +25,9 @@ import com.ucor.auth.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
+@EnableAsync
 @EnableWebSecurity
+@EnableCaching
 @RequiredArgsConstructor
 public class AuthConfiguration {
     

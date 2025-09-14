@@ -3,6 +3,8 @@ package com.ucor.auth.database.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,6 +33,7 @@ public class Category implements BaseEntity<Long> {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @JsonIgnoreProperties
     @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
     private List<User> users = new ArrayList<>();

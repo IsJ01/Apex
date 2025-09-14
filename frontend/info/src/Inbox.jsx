@@ -5,12 +5,12 @@ import renderHeader from './header/renderHeader';
 
 export default function Inbox() {
 
-    const {logout, updateUser, updateTitle} = useContext(AppContext);
+    const {logout, user, updateUser, updateTitle} = useContext(AppContext);
 
     useEffect(() => {
-        renderHeader(updateUser(), logout, updateTitle(), "inbox");
+        renderHeader(Object.keys(user).length !== 0 ? user : updateUser(), logout, updateTitle(), "inbox");
     }, []);
-
+    
     return (
         <div className='home-content'>
             <h1 className="home_title">UCOR</h1>

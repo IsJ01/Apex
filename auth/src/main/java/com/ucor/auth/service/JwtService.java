@@ -15,16 +15,20 @@ import org.springframework.stereotype.Service;
 
 import com.ucor.auth.database.entity.User;
 import com.ucor.auth.dto.CategoryReadDto;
+import com.ucor.auth.mapper.CategoryReadMapper;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
     @Value("${token.signing}")
     private String SIGING_TOKEN;
+    private final CategoryReadMapper categoryReadMapper;
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
@@ -32,7 +36,7 @@ public class JwtService {
         if (userDetails instanceof User user) {
             List<CategoryReadDto> categories = user.getCategories()
                 .stream()
-                .map(category -> new CategoryReadDto(category.getName()))
+                .map(categoryReadMapper::map)
                 .toList();
             claims.put("id", user.getId());
             claims.put("role", user.getRole().name());

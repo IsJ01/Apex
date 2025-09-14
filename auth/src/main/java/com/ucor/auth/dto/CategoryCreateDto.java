@@ -3,7 +3,6 @@ package com.ucor.auth.dto;
 import lombok.Value;
 
 @Value
-public class CategoryReadDto {
-    Long id;
+public class CategoryCreateDto {
     String name;
 }

@@ -14,10 +14,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserReadMapper {
 
+    private final CategoryReadMapper categoryReadMapper;
+
     public UserReadDto map(User user) {
         List<CategoryReadDto> categories = user.getCategories()
             .stream()
-            .map(category -> new CategoryReadDto(category.getName()))
+            .map(categoryReadMapper::map)
             .toList();
 
         UserReadDto dto = new UserReadDto(
@@ -25,7 +27,7 @@ public class UserReadMapper {
             user.getUsername(),
             user.getTelephoneNumber(),
             user.getYear(),
-            user.getRole().name(), 
+            user.getRole(), 
             categories);
             
         return dto;

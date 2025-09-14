@@ -1,10 +1,10 @@
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 
 import Login from "./Login.jsx";
-import Home from "./Inbox.js";
+import Home from "./Inbox.jsx";
 import Layout from "./Layout.jsx";
 import Register from './Register.jsx';
-import Configure from './configure/Configure.js';
+import Configure from './configure/Configure.jsx';
 // import UsersList from './users/UsersListPage.jsx';
 // import UserPage from './UserPage.js';
 // import Reports from './reports/Reports.jsx';

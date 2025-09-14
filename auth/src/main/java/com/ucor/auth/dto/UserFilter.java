@@ -7,11 +7,10 @@ import com.ucor.auth.database.entity.Role;
 import lombok.Value;
 
 @Value
-public class UserReadDto {
-    Long id;
+public class UserFilter {
     String username;
     String telephoneNumber;
     Integer year;
     Role role;
-    List<CategoryReadDto> categories;
+    List<CategoryCreateDto> categories;
 }

@@ -1,9 +1,6 @@
 package com.ucor.auth.filter;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +17,6 @@ import com.ucor.auth.service.UserDetailsServiceImpl;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -40,17 +36,17 @@ public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    private String getHeader(Cookie[] cookies) throws UnsupportedEncodingException {
-        if (cookies == null) {
-            return null;
-        }
-        for (Cookie cookie: cookies) {
-            if (cookie.getName().equals(AUTH_PREFIX)) {
-                return URLDecoder.decode(cookie.getValue(), "UTF-8");
-            }
-        }
-        return null;
-    }
+    // private String getHeader(Cookie[] cookies) throws UnsupportedEncodingException {
+    //     if (cookies == null) {
+    //         return null;
+    //     }
+    //     for (Cookie cookie: cookies) {
+    //         if (cookie.getName().equals(AUTH_PREFIX)) {
+    //             return URLDecoder.decode(cookie.getValue(), "UTF-8");
+    //         }
+    //     }
+    //     return null;
+    // }
 
     @Override
     protected void doFilterInternal(
@@ -64,7 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
         //     return;
         // }
                 
-        String authHeader = getHeader(request.getCookies());
+        String authHeader = request.getHeader(AUTH_PREFIX);
     
         if (StringUtils.isEmpty(authHeader) || !authHeader.startsWith(BEARER_PREFIX)) {
             filterChain.doFilter(request, response);

@@ -3,7 +3,9 @@ server:
   # ssl:
   #   certificate: certificates/cert.crt
   #   certificate-private-key: certificates/key.pem
-
+logging:
+  level:
+    root: INFO
 spring:
   config:
     import: optional:file:.env[.properties]

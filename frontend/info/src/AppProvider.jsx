@@ -1,17 +1,18 @@
 import { createContext, useState } from "react";
-import { api_url, users_api_url } from "./give_objects";
+import { users_api_url } from "./give_objects";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     const [user, setUser] = useState({});
     const [title, setTitle] = useState("");
-
+    
     const updateUser = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", `${api_url}`, false);
-        xhr.setRequestHeader("Api-Request", `${users_api_url}/api/v1/users/current`);
+        xhr.open("GET", `${users_api_url}/api/v1/users/current`, false);
+        xhr.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
         xhr.withCredentials = true;
+        xhr.onerror = () => {};
         xhr.send();
         if (xhr.responseText) {
             let data = JSON.parse(xhr.responseText);
@@ -38,13 +39,7 @@ export const AppProvider = ({ children }) => {
     }
 
     const logout = () => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", `${api_url}`, false);
-        xhr.setRequestHeader("Api-Request", `${users_api_url}/api/v1/users/logout`);
-        xhr.withCredentials = true;
-        xhr.onerror = () => {};
-        xhr.send();
-        setUser({});
+        localStorage.setItem("Authorization", "")
         window.location.reload(true);
     };
 

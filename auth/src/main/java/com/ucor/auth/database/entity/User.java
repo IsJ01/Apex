@@ -8,8 +8,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,6 +50,7 @@ public class User implements UserDetails, BaseEntity<Long> {
     @Builder.Default
     private Integer year = 2000;
 
+    @JsonIgnoreProperties
     @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -56,11 +61,41 @@ public class User implements UserDetails, BaseEntity<Long> {
 
     @Builder.Default
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    public static boolean isAdmin(UserDetails userDetails) {
+        return userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Role.ADMIN.name()));
+    }
+
+    public static boolean isExternalAdmin(UserDetails userDetails) {
+        return userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Role.EXTERNAL_ADMIN.name()));
+    }
+
+    public static boolean isUser(UserDetails userDetails) {
+        return userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Role.USER.name()));
+    }
+
+    public static boolean hasRights(UserDetails sender, UserDetails user) {
+        if (sender.getUsername().equals(user.getUsername())) {
+            return true;
+        }
+        else if ((isAdmin(sender) && !isAdmin(user)) || (isExternalAdmin(sender) && isUser(user))) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hasRights(UserDetails sender) {
+        if (isAdmin(sender) || isExternalAdmin(sender)) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.ucor.auth.database.entity.Role;
 import com.ucor.auth.database.entity.User;
 import com.ucor.auth.dto.SignUp;
-import com.ucor.auth.service.UserDetailsServiceImpl;
+import com.ucor.auth.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class InitCommandLiner implements CommandLineRunner {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserService userService;
     
     @Value("${admin.pass}")
     private String ADMIN_PASS;
@@ -32,17 +32,17 @@ public class InitCommandLiner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-            userDetailsService.loadUserByUsername("admin");
+            userService.findByUsername("Admin");
         } catch (UsernameNotFoundException e) {
             SignUp signUp = new SignUp(
-                "admin", 
+                "Admin", 
                 passwordEncoder.encode(ADMIN_PASS), 
                 ADMIN_NUMBER, 
                 ADMIN_YEAR
             );
-            User user = (User) userDetailsService.create(signUp);
+            User user = (User) userService.create(signUp);
             user.setRole(Role.ADMIN);
-            userDetailsService.updateRole(user.getId(), Role.ADMIN);
+            userService.updateRole(user.getId(), Role.ADMIN);
         }
     }
 

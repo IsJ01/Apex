@@ -4,9 +4,11 @@ import axios from 'axios';
 
 import './css/register.css';
 import './css/buttons.css';
-import { api_url, users_api_url } from './give_objects';
+import { users_api_url } from './give_objects';
 import { AppContext } from './AppProvider';
 import renderHeader from './header/renderHeader';
+import { getRegisterText } from './getText';
+import getLang from './getLang';
 
 export default function Register() {
 
@@ -30,53 +32,54 @@ export default function Register() {
             return;
         }
         
-        axios.post(`${api_url}`, 
+        axios.post(`${users_api_url}/api/v1/auth/sign-up`, 
             {
                 username: username, password: password,
                 telephoneNumber: number, year: year
-            }, 
-            { 
-                withCredentials: true, 
-                headers: {"Api-Request": `${users_api_url}/api/v1/auth/sign-up`} 
             }
         )
-        .then(() => {
-            updateUser(); renderHeader(updateUser(), logout, updateTitle(), "register"); navigate('/');
+        .then((res) => {
+            localStorage.setItem("Authorization", "Bearer " + res.data.token)
+            updateUser(); 
+            renderHeader(updateUser(), logout, updateTitle(), "register"); 
+            navigate('/');
         })
         .catch(e => setError(e.message));
     }
+    
+    const text = getRegisterText(getLang());
     
     return (
         <div className='register-content'>
             {Object.keys(user).length === 0 ?
                 <div>
                     <p>
-                        <label id="register-username" htmlFor="id-username">Username:</label> 
+                        <label id="register-username" htmlFor="id-username">{text.username}</label> 
                         <input type="text" name="username" maxLength="100" required id="id-username"/>
                     </p>
                     <p>
-                        <label id="register-number" htmlFor="id-number">Telephone number:</label>
+                        <label id="register-number" htmlFor="id-number">{text.number}</label>
                         <input type="text" name="number" maxLength="320" id="id-number"/>
                     </p>
                     <p>
-                        <label id="register-year" htmlFor="id-year">Year of birth:</label> 
+                        <label id="register-year" htmlFor="id-year">{text.year}</label> 
                         <input type="number" name="year" id="id-year"/>
                     </p>
                     <p>
-                        <label id="register-password" htmlFor="id-password">Password:</label> 
+                        <label id="register-password" htmlFor="id-password">{text.password}</label> 
                         <input type="password" name="password" require maxLength="100" id="id-password"/>
                     </p>
                     <p>
-                        <label id="register-repeated-password" htmlFor="id-repeated_password">Repeat password:</label> 
+                        <label id="register-repeated-password" htmlFor="id-repeated_password">{text.repeatedPassword}</label> 
                         <input type="password" name="repeat-password" maxLength="100" required id="id-repeated-password"/>
                     </p>
                     {error && <div className="alert alert-danger">{error}</div>}
                     <br/>
                     <button style={{width: "100%", height: "35px"}} id="register-button" type="button" 
-                        className="styleBtn styleBtn-outline-red-2" value="Registry" 
-                        onClick={register} title='Registry'/>
+                        className="styleBtn styleBtn-outline-red-2"
+                        onClick={register} title='Registry'>{text.button}</button>
                 </div>
-            : <h1 id="register-error">User is already log in</h1>}
+            : <h1 id="register-error">{text.error}</h1>}
         </div>
     );
 }

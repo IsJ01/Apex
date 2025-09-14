@@ -32,7 +32,9 @@ public class ApiClient {
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
                 String headerValue = request.getHeader(headerName);
-                headers.add(headerName, headerValue);
+                if (!headerName.equals("origin")) {
+                    headers.add(headerName, headerValue);
+                } 
             }
         }
         
@@ -51,15 +53,14 @@ public class ApiClient {
         catch (IOException e) {
             body = "";
         }
-    
         RequestEntity<?> requestEntity = RequestEntity
             .method(HttpMethod.valueOf(request.getMethod()), URI.create(fullPath))
             .headers(headers)
             .body(body.toString());
 
-        ResponseEntity<?> responseEntity = restTemplate.exchange(requestEntity, Object.class);
-
+        ResponseEntity<?> responseEntity = restTemplate.exchange(requestEntity, byte[].class); 
+        
         return responseEntity;
     }   
-
+ 
 }

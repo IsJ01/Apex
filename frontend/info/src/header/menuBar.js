@@ -1,8 +1,10 @@
 import { getHeaderText } from "../getText";
 import getLang from "../getLang";
+import { useNavigate } from "react-router-dom";
+
 
 export function getMenuBar(props) {
-    if (props.width >= 1024) {
+    if (props.width >= 1024 || Object.keys(props.user).length === 0) {
         return writeFullMenu(props);
     } else {
         return writeDropMenu(props)
@@ -54,26 +56,24 @@ function writeFullMenu(props) {
     options.appendChild(getLangBox(["English (UK)", "Русский (Rus)"], props.langSelect));
     menuBar.appendChild(options);
 
-    if (user.role === "ADMIN") {
+    if (user.role === "ADMIN" || user.role === "EXTERNAL_ADMIN") {
         options.appendChild(getBtnElement("/configure", text.confBtnTitle, text.confBtn));
-    }
-
-    for (let btn of [
-        // ["/", text.homeBtn, text.homeBtnTitle], 
-        ["/pages", text.pages, text.pagesTitle], 
-        ["/tasks", text.tasks, text.tasksTitle], ["/users", text.usersBtn, text.usersBtnTitle]]) {
-            options.appendChild(getBtnElement(btn[0], btn[1], btn[2]));
-    }
-
-    if (user.role === "ADMIN") {
-        options.appendChild(getBtnElement("/reports", text.reportsBtn, text.reportsBtnTitle));
         options.appendChild(getBtnElement("/blackList",  text.blackBtn, text.blackBtnTitle));
     }
 
     let p = document.createElement("p");
     p.className = "login_or_logout";
 
-    if (Object.keys(user).length !== 0) {
+    if (Object.keys(user).length !== 0) {    
+        for (let btn of [
+            ["/pages", text.pages, text.pagesTitle], 
+            ["/tasks", text.tasks, text.tasksTitle],
+            ["/reports", text.reportsBtn, text.reportsBtnTitle],
+            ["/users", text.usersBtn, text.usersBtnTitle]
+        ]) {
+            options.appendChild(getBtnElement(btn[0], btn[1], btn[2]));
+        }
+
         let userLabel = getBtnElement(`/users/${user.id}`, user.username, text.profileTitle);
         userLabel.className = "user_label";
         userLabel.style.color = "rgb(238, 238, 238)";
@@ -144,14 +144,15 @@ function writeDropMenu(props) {
     droptMenuCont.style.display = "none";
     droptMenuCont.className = "drop-menu-cont";
 
-    if (user.role === "ADMIN") {
+    if (user.role === "ADMIN" || user.role === "EXTERNAL_ADMIN") {
         droptMenuCont.appendChild(getDropMenuEl("/configure", text.confBtnTitle, text.confBtn));
     }
 
     let els = [
-        // ["/", text.homeBtn, text.homeBtnTitle], 
         ["/pages", text.pages, text.pagesTitle], 
-        ["/tasks", text.tasks, text.tasksTitle], ["/users", text.usersBtn, text.usersBtnTitle]];
+        ["/tasks", text.tasks, text.tasksTitle], 
+        ["/users", text.usersBtn, text.usersBtnTitle]
+    ];
 
     if (props.width < 375) {
         els.push([`/users/${user.id}`, user.username, text.profileTitle]);
@@ -173,8 +174,10 @@ function writeDropMenu(props) {
         logoutBtn.onclick = props.logout;
         logoutBtn.title = text.logoutBtnTitle;
         logoutBtn.textContent = text.logoutBtn;
-        p.appendChild(logoutBtn);
-
+        p.appendChild(logoutBtn); 
+        for (let btn of els) {
+            droptMenuCont.appendChild(getDropMenuEl(btn[0], btn[1], btn[2]));
+        }
     } else {
         if (props.width >= 375) {
             let loginBtn = getBtnElement("/login", text.loginBtn, text.loginBtnTitle);
@@ -190,12 +193,7 @@ function writeDropMenu(props) {
 
     }
 
-    for (let btn of els) {
-        droptMenuCont.appendChild(getDropMenuEl(btn[0], btn[1], btn[2]));
-    }
-
     dropMenu.appendChild(droptMenuCont);
-
 
     let menuBarCont = document.createElement("div");
     menuBar.className = "menu-bar";

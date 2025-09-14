@@ -18,7 +18,7 @@ public class AuthCookieMapper {
             .path("/")
             .maxAge(60 * 60 * 6)
             .httpOnly(true)
-            .secure(true)
+            .secure(!mode.equals("test"))
             .sameSite(mode.equals("dev") ? "None" : "Strict")
             .build();
         return cookie;

@@ -1,4 +1,14 @@
-html, .root, body, .layout {
+html {
+    height: 100%;
+}
+
+body {
+    height: calc(100% - 50px);
+    background-image: url("../img/Background.jpg");
+    background-size: cover;
+}
+
+.root, .layout {
     height: 100%;
 }
 
@@ -22,6 +32,7 @@ header {
     background: rgb(29, 22, 22);
     color: rgb(216, 64, 64); 
     border: none;
+    user-select: none;
 }
 
 @media screen and (max-width: 1200px) {
@@ -102,6 +113,7 @@ header {
 
 .menuBar {
     display: flex;
+    user-select: none;
 }
 
 .options {
@@ -117,7 +129,8 @@ header {
 }
 
 .option {
-    margin-right: 5px;
+    margin-right: 5px; 
+    white-space: nowrap;
 }
 
 .user_btn {

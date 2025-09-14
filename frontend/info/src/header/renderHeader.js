@@ -1,9 +1,21 @@
 import getLang from "../getLang";
-import { getInboxText, getLoginText, getRegisterText } from "../getText";
+import { getConfigurationText, getInboxText, getLoginText, getRegisterText } from "../getText";
 import { getMenuBar } from "./menuBar";
 
 function setText(component) {
     const lang = getLang();
+
+    if (component === "inbox") {
+        let description = document.getElementById("inbox-description");
+        let qualification = document.getElementById("inbox-qualification");
+
+        let text = getInboxText(lang);
+
+        description.textContent = text.description;
+        qualification.innerHTML = text.qualification
+
+        document.title = text.title;
+    }
 
     if (component === "login") {
         let username = document.getElementById("login-username");
@@ -49,15 +61,61 @@ function setText(component) {
         document.title = text.title;
     }
 
-    if (component === "inbox") {
-        let description = document.getElementById("inbox-description");
-        let qualification = document.getElementById("inbox-qualification");
+    if (component === "config") {
+        let users = document.getElementById("config-section-users");
+        let reports = document.getElementById("config-section-reports");
+        let list = document.getElementById("config-section-list");
+        let data = document.getElementById("config-section-data");
+        let pages = document.getElementById("config-section-pages");
+        let usersNoteItem = document.getElementById("users-note-item");
+        let categoriesNoteItem = document.getElementById("categories-note-item");
+        let nameFilter = document.getElementById("name-filter");
+        let numberFilter = document.getElementById("number-filter-label");
+        let yearFilter = document.getElementById("year-filter-label");
+        let roleFilter = document.getElementById("role-filter-label");
+        let categoriesFilter = document.getElementById("categories-filter-label");
+        let addNewCategoryLabel = document.getElementById("add-new-category-label");
+        let newCategoryLabel = document.getElementById("new-category-label");
+        let newCategoryButton = document.getElementById("new-category-button");
+        let userInfoName = document.getElementById("user-info-name");
+        let userInfoNumber = document.getElementById("user-info-number");
+        let userInfoYear = document.getElementById("user-info-year");
+        let userInfoRole = document.getElementById("user-info-role");
+        let userInfoCategories = document.getElementById("user-info-categories");
+        let error = document.getElementById("config-error");
 
-        let text = getInboxText(lang);
-
-        description.textContent = text.description;
-        qualification.innerHTML = text.qualification
-
+        let text = getConfigurationText(lang);
+        
+        if (error) {
+            error.textContent = text.error;
+        } else {
+            users.textContent = text.users;
+            reports.textContent = text.reports;
+            list.textContent = text.list;
+            data.textContent = text.data;
+            pages.textContent = text.pages;
+            usersNoteItem.textContent = text.usersNoteItem;
+            categoriesNoteItem.textContent = text.categoriesNoteItem;
+            if (nameFilter) {
+                nameFilter.placeholder = text.nameFilter;
+                numberFilter.textContent = text.numberFilter;
+                yearFilter.textContent = text.yearFilter;
+                roleFilter.textContent = text.roleFilter;
+                categoriesFilter.textContent = text.categoriesFilter;
+            }
+            if (addNewCategoryLabel) {
+                addNewCategoryLabel.textContent = text.addNewCategoryLabel;
+                newCategoryLabel.textContent = text.newCategoryLabel;
+                newCategoryButton.textContent = text.newCategoryButton;
+            }
+            if (userInfoName) {
+                userInfoName.textContent = text.userInfoName;
+                userInfoNumber.textContent = text.userInfoNumber;
+                userInfoYear.textContent = text.userInfoYear;
+                userInfoRole.textContent = text.userInfoRole;
+                userInfoCategories.textContent = text.userInfoCategories;
+            }
+        }
         document.title = text.title;
     }
 
@@ -105,6 +163,12 @@ export default function renderHeader(user, logout, title, component=null) {
     header.appendChild(getMenuBar({user: user, logout: logout, 
         langSelect: langSelect(user, logout, title, component), width: window.innerWidth}));
 
-    window.addEventListener("resize", () => renderHeader(user, logout, title, component));
+    // function onResize() {
+    //     renderHeader(user, logout, title, component)
+    // }
+
+    
+    // window.removeEventListener("resize", onResize);
+    // window.addEventListener("resize", onResize);
 
 }

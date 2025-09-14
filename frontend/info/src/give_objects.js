@@ -1,7 +1,7 @@
 // модуль для получения объектов из api
-const api_url = "http://localhost:80"
-const users_api_url = "/api/auth";
-const reports_api_url = "http://127.0.0.1:8002/api/v1";
+// const api_url = "http://localhost:80"
+const users_api_url = "http://localhost:8001";
+const reports_api_url = "http://127.0.0.1:8002";
 const reports_api_url_clear = "http://127.0.0.1:8002";
 const black_list_api_url = "http://127.0.0.1:8003";
 const data_api_url = "http://127.0.0.1:8004";
@@ -207,7 +207,7 @@ function get_reports_by_to(id) {
 }
 
 export {
-    api_url,
+    // api_url,
     users_api_url, reports_api_url, black_list_api_url, report_categories_api_url, data_api_url, 
     tasks_api_url, chats_api_url, messages_api_url, tables_api_url, services_api_url, rows_api_url, fields_api_url, 
     pages_api_url, elements_api_url, props_api_url, cols_api_url, tabs_api_url, reports_api_url_clear,

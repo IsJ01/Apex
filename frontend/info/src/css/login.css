@@ -1,9 +1,9 @@
 .login-content {
+    margin-top: 50px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../img/Background.jpg");
     background-size: cover;
 }
 

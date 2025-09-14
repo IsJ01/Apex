@@ -62,21 +62,58 @@ function getConfigurationText(lang) {
     switch (lang) {
         case "English (UK)":
             text = {
-                listTitle: "Dates",
-                orgTitle: "Organization",
-                uCat: "User categories",
-                rCat: "Reports categories",
-                staffTitle: "Staff",
+                users: "Users",
+                reports: "Reports",
+                list: "Black List",
+                data: "Data",
+                pages: "Virtual Pages",
+                title: "Configuration",
+                error: "This page is only available to administation",
+                usersNoteItem: "Users",
+                categoriesNoteItem: "Categories",
+                nameFilter: "Name",
+                numberFilter: "Number",
+                yearFilter: "Year",
+                roleFilter: "Role",
+                addNewCategoryLabel: "New category",
+                newCategoryLabel: "Name",
+                newCategoryButton: "Add",
+                categoriesFilter: "Categories",
+                userInfoId: "Id",
+                userInfoName: "User name",
+                userInfoNumber: "Number",
+                userInfoYear: "Year",
+                userInfoRole: "Role",
+                userInfoCategories: "Categories",
             };
             break;
         case "Русский (Rus)":
             text = {
-                listTitle: "Данные",
-                orgTitle: "Организация",
-                uCat: "Категории пользователей",
-                rCat: "Категории отчетов",
-                staffTitle: "Персонал",
+                users: "Пользователи",
+                reports: "Отчеты",
+                list: "Черный список",
+                data: "Данные",
+                pages: "Виртуальные страницы",
+                title: "Настройки",
+                error: "Доступ к странице разрешен только администрации",
+                usersNoteItem: "Пользователи",
+                categoriesNoteItem: "Категории",
+                nameFilter: "Имя",
+                numberFilter: "Номер",
+                yearFilter: "Год",
+                roleFilter: "Роль",
+                addNewCategoryLabel: "Новая категория",
+                newCategoryLabel: "Имя",
+                newCategoryButton: "Добавить",
+                categoriesFilter: "Категории",
+                userInfoId: "Идентификатор",
+                userInfoName: "Имя",
+                userInfoNumber: "Номер",
+                userInfoYear: "Год",
+                userInfoRole: "Роль",
+                userInfoCategories: "Категории",
             };
+            break;
     }
     return text;
 }

@@ -1,11 +1,9 @@
 .register-content {
-    padding-top: 50px;
+    margin-top: 50px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../img/Background.jpg");
-    background-size: cover;
 }
 
 .register-content div p label {

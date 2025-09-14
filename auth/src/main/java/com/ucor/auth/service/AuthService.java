@@ -17,6 +17,7 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final UserDetailsServiceImpl userDetailsService;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
@@ -27,7 +28,7 @@ public class AuthService {
             signUp.getTelephoneNumber(),
             signUp.getYear()
         );
-        UserDetails user = userDetailsService.create(req);
+        UserDetails user = userService.create(req);
         return jwtService.generateToken(user);
     }
 

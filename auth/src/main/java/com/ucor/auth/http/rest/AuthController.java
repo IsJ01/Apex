@@ -3,15 +3,14 @@ package com.ucor.auth.http.rest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ucor.auth.dto.JwtResponse;
 import com.ucor.auth.dto.SignIn;
 import com.ucor.auth.dto.SignUp;
-import com.ucor.auth.mapper.AuthCookieMapper;
 import com.ucor.auth.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.status;
 
 import java.io.UnsupportedEncodingException;
@@ -33,25 +32,21 @@ public class AuthController {
     private String mode;
 
     private final AuthService authService;
-    private final AuthCookieMapper authCookieMapper;
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody @Validated SignUp signUp) 
             throws UnsupportedEncodingException {
-        String 
-        token = authService.signUp(signUp);
+        String token = authService.signUp(signUp);
         return status(201)
-            .header("Set-Cookie", authCookieMapper.getCookie(token).toString())
-            .build();
+            .body(new JwtResponse(token));
     }
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> signIn(@RequestBody @Validated SignIn signIn) 
             throws UnsupportedEncodingException {
         String token = authService.signIn(signIn);
-        return ok()
-                .header("Set-Cookie", authCookieMapper.getCookie(token).toString())
-                .build();
+        return status(201)
+            .body(new JwtResponse(token));
     }
     
 }

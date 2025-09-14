@@ -1,17 +1,13 @@
 package com.ucor.auth.dto;
 
-import java.util.List;
-
 import com.ucor.auth.database.entity.Role;
 
 import lombok.Value;
 
 @Value
-public class UserReadDto {
-    Long id;
-    String username;
+public class UserPatchDto {
+    String password;
     String telephoneNumber;
     Integer year;
     Role role;
-    List<CategoryReadDto> categories;
 }

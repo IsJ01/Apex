@@ -1,0 +1,244 @@
+.users-filter {
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: space-around;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+}
+
+.filter-field {
+    width: 175px;
+    display: flex;
+
+}
+
+.filter-input {
+    padding: 0px;
+    width: 100px;
+    margin-left: 15px;
+    border: 0px;
+    border-bottom: 1px solid gray;
+    background: none;
+}
+
+.filter-input:focus {
+    outline: none;
+}
+
+.users-search {
+    height: 100%;
+    display: grid;
+    padding: 10px;
+    grid-column: 1;
+    grid-template-rows: 30px auto;
+}
+
+.users-input {
+    height: 25px;
+    border: 1px solid rgb(29, 22, 22);
+    grid-row: 1;
+}
+
+.users-input:focus {
+    outline: none;
+}
+
+.users-list {
+    display: grid;
+    grid-template-rows: auto 30px;
+}
+
+.users-list-arrows {
+    display: grid;
+    grid-template-columns: auto 30px 25px 10px 25px 30px auto;
+}
+
+.users-list-arrow {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    user-select: none;
+}
+
+.users-list-number {
+    padding-top: 2px;
+}
+
+.categories-input {
+    margin-top: 5px;
+    height: 25px;
+    line-height: 20px;
+    font-size: 18px;
+    /* border: 1px solid rgb(29, 22, 22); */
+    user-select: none;
+}
+
+.categories-input-arrow {
+    width: 100%;
+    text-align: end;
+    display: grid;
+    grid-template-columns: 75% auto;
+}
+
+.categories-list {
+    position: relative;
+    border: 1px solid black;
+    display: none;
+    top: 4px;
+    left: 10px;
+}
+
+.action-field {
+    display: grid;
+    grid-template-columns: 10px auto 5px auto 10px;
+    border: 1px solid rgb(29, 22, 22);
+    border-left: none;
+    color: rgb(29, 22, 22);
+    cursor: pointer;
+    user-select: none;
+}
+
+.action-field * {
+    cursor: pointer;
+}
+
+.action-field:hover {
+    background: rgb(29, 22, 22);
+    color: white;
+    transition: 0.1s;
+}
+
+.action-button {
+    background: none;
+    border: 0px;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+.new-category-dialog {
+    border: 1px solid rgb(29, 22, 22);
+    border-radius: 0px;
+    outline: none;
+    text-align: center;
+}
+
+.dialog-button {
+    width: 100%;
+    margin-top: 5px;
+    background: none;
+}
+
+.category-row {
+    height: 25px;
+    font-size: 17px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    margin: 5px;
+    background: rgb(238, 238, 238);
+}
+
+.category-row:hover {
+    box-shadow: 0px 0px 2px 1px gray;
+}
+
+.category-mini-row {
+    font-size: 16px;
+    padding-left: 5px;
+    display: grid;
+    cursor: pointer;
+    overflow: hidden;
+    grid-template-columns: 5px auto;
+}
+
+.category-mini-row * {
+    cursor: pointer;
+}
+
+.category-mini-row:hover {
+    box-shadow: 0px 0px 2px 1px gray;
+}
+
+.categories-mini-list-arrows {
+    display: grid;
+    grid-template-columns: auto 15px 12px 10px 12px 15px auto;
+}
+
+.categories-mini-list-arrow {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    user-select: none;
+}
+
+.categories-mini-list-input {
+    height: 18px;
+    font-size: 16px;
+    border: 0px;
+}
+
+.categories-mini-list-input:focus {
+    outline: none;
+}
+
+.categories-mini-list-number {
+    padding-top: 1px;
+    font-size: 16px;
+}
+
+.user-row {
+    height: 25px;
+    font-size: 17px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    overflow: hidden;
+    background: rgb(238, 238, 238);
+}
+
+.user-row label {
+    width: 175px;
+    overflow: hidden;
+}
+
+.user-row:hover {
+    box-shadow: 0px 0px 2px 1px gray;
+}
+
+.user-row * {
+    text-align: center;
+    cursor: pointer;
+}
+
+.user-info-content {
+    height: 100%;
+    margin-left: 20px;
+    padding: 5px;
+}
+
+.user-info-list {
+    grid-row: 1;
+    margin: 5px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: auto 210px 210px auto;
+    grid-template-rows: 25px 25px 25px auto;
+}
+
+.user-info-row {
+    display: grid;
+    grid-template-columns: 10px auto 10px 100px 10px;
+    background: rgb(238, 238, 238);
+}
+
